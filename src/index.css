@@ -32,6 +32,18 @@ body {
   color: #F8FAFC;
 }
 
+/* Custom macOS Pointer on Desktop - hide native cursor when custom cursor is active */
+@media (hover: hover) and (pointer: fine) {
+  html.custom-cursor-active,
+  html.custom-cursor-active body,
+  html.custom-cursor-active a,
+  html.custom-cursor-active button,
+  html.custom-cursor-active [role="button"],
+  html.custom-cursor-active select {
+    cursor: none !important;
+  }
+}
+
 /* Custom subtle scrollbar */
 ::-webkit-scrollbar {
   width: 8px;
