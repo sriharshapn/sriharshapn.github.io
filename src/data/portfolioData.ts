@@ -362,8 +362,8 @@ export const eventItems: EventItem[] = [
     description: "Intensive 3-hour rapid development sprint hosted by Protocol Club at BMSCE. Built Jan Sathi, an AI-powered municipal issue reporting and automated triage system with image classification.",
     statusBadge: "Verified Certificate Issued",
     certificateType: "local_modal",
-    certificatePdfUrl: "/certificates/the-beginner-hackathon-bmsce.pdf",
-    certificateImageUrl: "/certificates/the-beginner-hackathon-bmsce.png",
+    certificatePdfUrl: "./certificates/the-beginner-hackathon-bmsce.pdf",
+    certificateImageUrl: "./certificates/the-beginner-hackathon-bmsce.png",
     certificateNotice: "Awarded Certificate of Participation by Dr. Kavitha Sooda, Professor and Head, Department of CSE, BMSCE."
   },
   {

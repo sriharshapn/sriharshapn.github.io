@@ -194,8 +194,8 @@ export const Events: React.FC = () => {
           isOpen={activeModalEvent === 'beginner-hackathon-2026'}
           onClose={() => setActiveModalEvent(null)}
           title={beginnerHackathon.title}
-          imageSrc={beginnerHackathon.certificateImageUrl || '/certificates/the-beginner-hackathon-bmsce.png'}
-          pdfSrc={beginnerHackathon.certificatePdfUrl || '/certificates/the-beginner-hackathon-bmsce.pdf'}
+          imageSrc={beginnerHackathon.certificateImageUrl || './certificates/the-beginner-hackathon-bmsce.png'}
+          pdfSrc={beginnerHackathon.certificatePdfUrl || './certificates/the-beginner-hackathon-bmsce.pdf'}
           recipient={personalInfo.name}
           issuer="Protocol Club & Dept of CSE, BMSCE"
           date="March 5, 2026"
