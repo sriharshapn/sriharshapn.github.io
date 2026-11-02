@@ -39,14 +39,14 @@ export const About: React.FC = () => {
           transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
           className="space-y-3 mb-12 lg:mb-16"
         >
-          <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-zinc-900/90 border border-zinc-800 text-xs font-mono text-lime-400">
+          <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-zinc-900/90 border border-zinc-800 text-xs font-mono uppercase tracking-[0.12em] text-lime-400">
             <Terminal className="w-3.5 h-3.5" />
             <span>01 // DEVELOPER WORKSPACE & IDENTITY</span>
           </div>
 
           <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-4">
             <div>
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight">
+              <h2 className="text-[clamp(2rem,5vw,3.5rem)] font-bold text-white tracking-[-0.03em] leading-tight">
                 About Me
               </h2>
               <p className="text-zinc-400 text-sm sm:text-base max-w-2xl font-mono mt-2">
@@ -55,7 +55,7 @@ export const About: React.FC = () => {
             </div>
 
             {/* Live Telemetry Metadata Pill */}
-            <div className="flex items-center space-x-3 px-3.5 py-1.5 rounded-lg bg-zinc-900/60 border border-zinc-800 text-xs font-mono text-zinc-400 self-start lg:self-auto">
+            <div className="flex items-center space-x-3 px-3.5 py-1.5 rounded-lg bg-zinc-900/60 border border-zinc-800 text-xs font-mono uppercase tracking-[0.08em] text-zinc-400 self-start lg:self-auto">
               <span className="flex items-center gap-1.5 text-emerald-400">
                 <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
                 <span>ONLINE</span>

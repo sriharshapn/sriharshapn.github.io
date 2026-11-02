@@ -27,35 +27,38 @@ export const Hero: React.FC = () => {
               transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
               className="flex flex-wrap items-center justify-center lg:justify-start gap-2.5"
             >
-              <div className="inline-flex items-center space-x-2 px-3 py-1.5 rounded-full bg-zinc-900/90 border border-zinc-800 text-xs text-zinc-300 font-mono backdrop-blur-md shadow-xs">
+              <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-zinc-900/90 border border-zinc-800 text-[11px] sm:text-xs text-zinc-300 font-mono uppercase tracking-[0.1em] backdrop-blur-md shadow-xs">
                 <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
                 <span className="text-emerald-300 font-semibold">{personalInfo.title}</span>
               </div>
 
-              <div className="inline-flex items-center space-x-1.5 px-3 py-1.5 rounded-full bg-zinc-900/80 border border-zinc-800 text-xs text-zinc-400 font-mono">
+              <div className="inline-flex items-center space-x-1.5 px-3.5 py-1.5 rounded-full bg-zinc-900/80 border border-zinc-800 text-[11px] sm:text-xs text-zinc-400 font-mono uppercase tracking-[0.08em]">
                 <GraduationCap className="w-3.5 h-3.5 text-violet-400" />
                 <span>{personalInfo.collegeShort}</span>
               </div>
 
-              <div className="inline-flex items-center space-x-1.5 px-3 py-1.5 rounded-full bg-zinc-900/80 border border-zinc-800 text-xs text-zinc-400 font-mono">
+              <div className="inline-flex items-center space-x-1.5 px-3.5 py-1.5 rounded-full bg-zinc-900/80 border border-zinc-800 text-[11px] sm:text-xs text-zinc-400 font-mono uppercase tracking-[0.08em]">
                 <MapPin className="w-3.5 h-3.5 text-zinc-500" />
                 <span>Bengaluru, India</span>
               </div>
             </motion.div>
 
-            {/* Name & Headline */}
+            {/* Name & Headline: Bold, Oversized & Editorial */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
-              className="space-y-3"
+              className="space-y-3.5"
             >
-              <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight text-white leading-[1.08]">
+              <h1 className="text-[clamp(1.85rem,5.5vw,5.25rem)] sm:text-[clamp(2.5rem,6.8vw,5.75rem)] font-bold tracking-[-0.035em] text-white leading-[1.05] sm:leading-[0.98]">
                 <span className="block text-zinc-100">Sri Harsha</span>
-                <span className="block text-zinc-100">Penugondla Nagaraja</span>
+                <span className="block text-zinc-100">
+                  <span className="block sm:inline">Penugondla</span>{' '}
+                  <span className="block sm:inline">Nagaraja</span>
+                </span>
               </h1>
               
-              <p className="text-lg sm:text-2xl lg:text-3xl font-semibold bg-gradient-to-r from-emerald-400 via-teal-300 to-violet-400 bg-clip-text text-transparent pt-1">
+              <p className="text-[clamp(1.1rem,2.5vw,2.1rem)] font-semibold tracking-[-0.02em] bg-gradient-to-r from-emerald-400 via-teal-300 to-violet-400 bg-clip-text text-transparent pt-1 leading-snug">
                 "{personalInfo.heroSubtitle}"
               </p>
             </motion.div>

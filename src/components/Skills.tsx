@@ -52,11 +52,11 @@ export const Skills: React.FC = () => {
           className="flex flex-col md:flex-row md:items-end justify-between mb-12 lg:mb-16 gap-6"
         >
           <div className="space-y-2">
-            <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-slate-900 border border-slate-800 text-xs font-mono text-emerald-400">
+            <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-slate-900 border border-slate-800 text-xs font-mono uppercase tracking-[0.12em] text-emerald-400">
               <Sparkles className="w-3.5 h-3.5" />
-              <span>TECHNICAL REPERTOIRE</span>
+              <span>02 // TECHNICAL REPERTOIRE</span>
             </div>
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
+            <h2 className="text-[clamp(2rem,5vw,3.5rem)] font-bold text-white tracking-[-0.03em] leading-tight">
               Skills & Technologies
             </h2>
             <p className="text-slate-400 text-sm sm:text-base max-w-2xl font-mono">

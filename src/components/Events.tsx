@@ -34,16 +34,16 @@ export const Events: React.FC = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-60px' }}
           transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-          className="space-y-2 mb-12 lg:mb-16"
+          className="space-y-3 mb-12 lg:mb-16"
         >
-          <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-slate-900 border border-slate-800 text-xs font-mono text-emerald-400">
+          <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-slate-900 border border-slate-800 text-xs font-mono uppercase tracking-[0.12em] text-emerald-400">
             <Trophy className="w-3.5 h-3.5" />
-            <span>COMPETITIONS & CREDENTIALS</span>
+            <span>05 // HACKATHONS & CREDENTIALS</span>
           </div>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
+          <h2 className="text-[clamp(2rem,5vw,3.5rem)] font-bold text-white tracking-[-0.03em] leading-tight">
             Hackathons & Events
           </h2>
-          <p className="text-slate-400 text-sm sm:text-base max-w-2xl font-mono">
+          <p className="text-slate-400 text-sm sm:text-base max-w-2xl font-sans mt-2">
             Competitive technical sprints, hackathons, and verified participation certificates.
           </p>
         </motion.div>
@@ -69,13 +69,13 @@ export const Events: React.FC = () => {
                       
                       {/* Card Header: Organizer & Status Badge */}
                       <div className="flex flex-wrap items-center justify-between gap-2">
-                        <span className="text-xs font-mono uppercase tracking-wider text-slate-400">
+                        <span className="text-xs font-mono uppercase tracking-[0.12em] text-slate-400">
                           {event.organizer}
                         </span>
 
                         {/* Status Pill */}
                         <div
-                          className={`inline-flex items-center space-x-1.5 px-2.5 py-1 rounded-full text-[11px] font-mono border ${
+                          className={`inline-flex items-center space-x-1.5 px-2.5 py-1 rounded-full text-[11px] font-mono uppercase tracking-[0.08em] border ${
                             hasModalCert || hasExternalCert
                               ? 'bg-emerald-950/40 border-emerald-800/50 text-emerald-300'
                               : 'bg-slate-900 border-slate-800 text-slate-400'
@@ -96,8 +96,8 @@ export const Events: React.FC = () => {
                       </div>
 
                       {/* Title & Date */}
-                      <div className="space-y-1">
-                        <h3 className="text-xl font-bold text-white group-hover:text-emerald-300 transition-colors">
+                      <div className="space-y-1.5">
+                        <h3 className="text-xl sm:text-2xl font-bold text-white tracking-[-0.02em] group-hover:text-emerald-300 transition-colors">
                           {event.title}
                         </h3>
                         
@@ -122,14 +122,14 @@ export const Events: React.FC = () => {
                       </div>
 
                       {/* Description */}
-                      <p className="text-slate-300 text-sm leading-relaxed">
+                      <p className="text-slate-300 text-sm leading-relaxed font-sans">
                         {event.description}
                       </p>
 
                       {/* Certificate / Verification Notice */}
                       {event.certificateNotice && (
                         <div className="p-3 rounded-xl bg-slate-950/80 border border-slate-800/80 text-xs font-mono text-slate-400 space-y-1">
-                          <div className="flex items-center gap-1.5 text-slate-300 font-semibold">
+                          <div className="flex items-center gap-1.5 text-slate-300 font-semibold uppercase tracking-[0.08em]">
                             {hasModalCert || hasExternalCert ? (
                               <FileCheck2 className="w-3.5 h-3.5 text-emerald-400" />
                             ) : (
@@ -137,7 +137,7 @@ export const Events: React.FC = () => {
                             )}
                             <span>Verification Detail:</span>
                           </div>
-                          <p className="text-[11px] text-slate-400 leading-normal">
+                          <p className="text-[11px] text-slate-400 leading-normal font-mono">
                             {event.certificateNotice}
                           </p>
                         </div>
@@ -152,7 +152,7 @@ export const Events: React.FC = () => {
                           <button
                             type="button"
                             onClick={() => setActiveModalEvent(event.id)}
-                            className="w-full py-2.5 px-4 rounded-xl bg-gradient-to-r from-emerald-600 to-emerald-500 hover:from-emerald-500 hover:to-teal-400 text-slate-950 font-bold text-xs font-mono tracking-wide transition-all flex items-center justify-center gap-2 shadow-md shadow-emerald-950/40 active:scale-95 group/cert"
+                            className="w-full py-2.5 px-4 rounded-xl bg-gradient-to-r from-emerald-600 to-emerald-500 hover:from-emerald-500 hover:to-teal-400 text-slate-950 font-bold text-xs font-mono uppercase tracking-[0.08em] transition-all flex items-center justify-center gap-2 shadow-md shadow-emerald-950/40 active:scale-95 group/cert"
                           >
                             <Eye className="w-4 h-4 group-hover/cert:scale-110 transition-transform" />
                             <span>View Verified Certificate</span>
@@ -165,7 +165,7 @@ export const Events: React.FC = () => {
                           href={event.certificateUrl}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="w-full py-2.5 px-4 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-slate-700 text-slate-200 hover:text-white text-xs font-mono transition-all flex items-center justify-center gap-2 group/ext"
+                          className="w-full py-2.5 px-4 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-slate-700 text-slate-200 hover:text-white text-xs font-mono uppercase tracking-[0.08em] transition-all flex items-center justify-center gap-2 group/ext"
                         >
                           <span>View Certificate Credential</span>
                           <ExternalLink className="w-3.5 h-3.5 text-slate-400 group-hover/ext:translate-x-0.5 group-hover/ext:-translate-y-0.5 transition-transform" />
@@ -173,7 +173,7 @@ export const Events: React.FC = () => {
                       )}
 
                       {isPending && (
-                        <div className="w-full py-2 px-3 rounded-lg bg-slate-950/60 border border-slate-800 text-center text-xs font-mono text-slate-500">
+                        <div className="w-full py-2 px-3 rounded-lg bg-slate-950/60 border border-slate-800 text-center text-xs font-mono text-slate-500 uppercase tracking-[0.06em]">
                           Participation Recorded • Awaiting Organizer Results
                         </div>
                       )}

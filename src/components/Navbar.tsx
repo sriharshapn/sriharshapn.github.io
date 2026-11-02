@@ -87,8 +87,8 @@ export const Navbar: React.FC = () => {
                 <a
                   key={item.label}
                   href={item.href}
-                  className={`relative px-3.5 py-1.5 rounded-full text-xs font-medium tracking-wide transition-colors duration-200 ${
-                    isActive ? 'text-emerald-300' : 'text-slate-300 hover:text-white'
+                  className={`relative px-3.5 py-1.5 rounded-full font-mono text-[11px] lg:text-xs uppercase tracking-[0.08em] font-medium transition-colors duration-200 ${
+                    isActive ? 'text-emerald-300' : 'text-zinc-300 hover:text-white'
                   }`}
                 >
                   {isActive && (
@@ -180,10 +180,10 @@ export const Navbar: React.FC = () => {
                   initial={{ opacity: 0, x: -10 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: idx * 0.04 }}
-                  className="px-3.5 py-2.5 rounded-xl text-sm font-medium text-slate-200 hover:text-emerald-300 hover:bg-slate-900/90 border border-transparent hover:border-slate-800 transition-all flex items-center justify-between"
+                  className="px-3.5 py-2.5 rounded-xl font-mono text-xs uppercase tracking-[0.08em] font-medium text-zinc-200 hover:text-emerald-300 hover:bg-zinc-900/90 border border-transparent hover:border-zinc-800 transition-all flex items-center justify-between"
                 >
                   <span>{item.label}</span>
-                  <span className="text-xs font-mono text-slate-600">→</span>
+                  <span className="text-xs font-mono text-zinc-600">→</span>
                 </motion.a>
               ))}
             </div>

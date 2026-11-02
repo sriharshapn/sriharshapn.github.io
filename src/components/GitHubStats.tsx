@@ -147,15 +147,15 @@ export const GitHubStats: React.FC = () => {
           transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
           className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6"
         >
-          <div className="space-y-2">
-            <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-slate-900 border border-slate-800 text-xs font-mono text-emerald-400">
+          <div className="space-y-3">
+            <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-slate-900 border border-slate-800 text-xs font-mono uppercase tracking-[0.12em] text-emerald-400">
               <GithubIcon className="w-3.5 h-3.5" />
-              <span>SOURCE CODE REPOSITORIES</span>
+              <span>06 // OPEN SOURCE TELEMETRY</span>
             </div>
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
+            <h2 className="text-[clamp(2rem,5vw,3.5rem)] font-bold text-white tracking-[-0.03em] leading-tight">
               GitHub Profile & Repositories
             </h2>
-            <p className="text-slate-400 text-sm sm:text-base max-w-2xl font-mono">
+            <p className="text-slate-400 text-sm sm:text-base max-w-2xl font-sans mt-2">
               Direct links to open-source contributions, hackathon sprints, and engineering codebases.
             </p>
           </div>
@@ -165,7 +165,7 @@ export const GitHubStats: React.FC = () => {
               href={personalInfo.github}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-slate-700 text-xs font-mono text-slate-200 hover:text-white transition-all shadow-sm group"
+              className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-slate-700 text-xs font-mono uppercase tracking-[0.08em] text-slate-200 hover:text-white transition-all shadow-sm group"
             >
               <GithubIcon className="w-4 h-4 text-emerald-400 group-hover:scale-110 transition-transform" />
               <span>github.com/{profile.login}</span>
@@ -215,28 +215,28 @@ export const GitHubStats: React.FC = () => {
 
           <div className="flex items-center space-x-6 sm:space-x-8 text-center border-t md:border-t-0 md:border-l border-slate-800 pt-4 md:pt-0 md:pl-8 w-full md:w-auto justify-around md:justify-start">
             <div className="p-2 rounded-lg hover:bg-slate-900/40 transition-colors">
-              <div className="text-xl sm:text-2xl font-bold font-mono text-white">
+              <div className="text-xl sm:text-2xl font-bold font-mono tracking-tight text-white">
                 {profile.public_repos}
               </div>
-              <div className="text-[11px] font-mono uppercase text-slate-400 mt-0.5">
+              <div className="text-[11px] font-mono uppercase tracking-[0.1em] text-slate-400 mt-0.5">
                 Repositories
               </div>
             </div>
 
             <div className="p-2 rounded-lg hover:bg-slate-900/40 transition-colors">
-              <div className="text-xl sm:text-2xl font-bold font-mono text-emerald-400">
+              <div className="text-xl sm:text-2xl font-bold font-mono tracking-tight text-emerald-400">
                 {profile.followers}
               </div>
-              <div className="text-[11px] font-mono uppercase text-slate-400 mt-0.5">
+              <div className="text-[11px] font-mono uppercase tracking-[0.1em] text-slate-400 mt-0.5">
                 Followers
               </div>
             </div>
 
             <div className="p-2 rounded-lg hover:bg-slate-900/40 transition-colors">
-              <div className="text-xl sm:text-2xl font-bold font-mono text-violet-400">
+              <div className="text-xl sm:text-2xl font-bold font-mono tracking-tight text-violet-400">
                 {profile.following}
               </div>
-              <div className="text-[11px] font-mono uppercase text-slate-400 mt-0.5">
+              <div className="text-[11px] font-mono uppercase tracking-[0.1em] text-slate-400 mt-0.5">
                 Following
               </div>
             </div>

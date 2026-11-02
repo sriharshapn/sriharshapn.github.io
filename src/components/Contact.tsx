@@ -53,16 +53,16 @@ export const Contact: React.FC = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-60px' }}
           transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-          className="space-y-2 mb-12 lg:mb-16"
+          className="space-y-3 mb-12 lg:mb-16"
         >
-          <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-slate-900 border border-slate-800 text-xs font-mono text-emerald-400">
+          <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-slate-900 border border-slate-800 text-xs font-mono uppercase tracking-[0.12em] text-emerald-400">
             <Mail className="w-3.5 h-3.5" />
-            <span>LET'S CONNECT</span>
+            <span>07 // DIRECT COMMUNICATION</span>
           </div>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
+          <h2 className="text-[clamp(2rem,5vw,3.5rem)] font-bold text-white tracking-[-0.03em] leading-tight">
             Contact & Collaboration
           </h2>
-          <p className="text-slate-400 text-sm sm:text-base max-w-2xl font-mono">
+          <p className="text-slate-400 text-sm sm:text-base max-w-2xl font-sans mt-2">
             Open to engineering internships, AI/ML research collaborations, and hackathon projects.
           </p>
         </motion.div>
@@ -80,14 +80,14 @@ export const Contact: React.FC = () => {
             
             {/* Status / Availability Banner */}
             <div className="p-6 rounded-2xl bg-gradient-to-br from-slate-900/80 to-slate-950 border border-slate-800 hover:border-slate-700 space-y-3 shadow-xl transition-all duration-300">
-              <div className="flex items-center space-x-2 text-xs font-mono text-emerald-400 font-semibold">
+              <div className="flex items-center space-x-2 text-xs font-mono uppercase tracking-[0.12em] text-emerald-400 font-semibold">
                 <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
                 <span>CURRENT STATUS</span>
               </div>
-              <h3 className="text-lg font-bold text-white tracking-tight">
+              <h3 className="text-lg sm:text-xl font-bold text-white tracking-[-0.02em]">
                 Seeking AI/ML Engineering & Backend Opportunities
               </h3>
-              <p className="text-xs text-slate-300 leading-relaxed">
+              <p className="text-xs sm:text-sm text-slate-300 leading-relaxed font-sans">
                 Currently pursuing B.E. in Artificial Intelligence & Machine Learning at BMSCE, Bengaluru. Interested in practical problem-solving in computer vision, OCR, scalable systems, and numerical modeling.
               </p>
               <div className="pt-2 flex items-center gap-2 text-xs font-mono text-slate-400">
@@ -99,14 +99,14 @@ export const Contact: React.FC = () => {
             {/* Email Card with Copy Interaction */}
             <div className="p-6 rounded-2xl bg-slate-900/40 border border-slate-800/80 hover:border-slate-700/80 space-y-4 transition-all duration-300">
               <div className="flex items-center justify-between">
-                <div className="flex items-center space-x-2 text-xs font-mono text-violet-400 font-semibold">
+                <div className="flex items-center space-x-2 text-xs font-mono uppercase tracking-[0.12em] text-violet-400 font-semibold">
                   <Mail className="w-4 h-4" />
                   <span>DIRECT EMAIL</span>
                 </div>
                 <button
                   type="button"
                   onClick={handleCopyEmail}
-                  className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-slate-800/80 hover:bg-slate-700 text-[11px] font-mono text-slate-300 hover:text-white transition-all active:scale-95"
+                  className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-slate-800/80 hover:bg-slate-700 text-[11px] font-mono uppercase tracking-[0.08em] text-slate-300 hover:text-white transition-all active:scale-95"
                   aria-label="Copy email address"
                 >
                   <AnimatePresence mode="wait">
@@ -140,11 +140,11 @@ export const Contact: React.FC = () => {
               <div>
                 <a
                   href={`mailto:${personalInfo.email}`}
-                  className="text-base sm:text-lg font-mono font-semibold text-white hover:text-emerald-400 transition-colors break-all"
+                  className="text-base sm:text-lg font-mono font-semibold tracking-tight text-white hover:text-emerald-400 transition-colors break-all"
                 >
                   {personalInfo.email}
                 </a>
-                <p className="text-xs text-slate-400 mt-1">
+                <p className="text-xs text-slate-400 mt-1 font-sans">
                   Click to open default email client directly.
                 </p>
               </div>
@@ -163,7 +163,7 @@ export const Contact: React.FC = () => {
                     <GithubIcon className="w-4 h-4" />
                   </div>
                   <div>
-                    <span className="text-xs font-mono font-bold text-white block">GitHub</span>
+                    <span className="text-xs font-mono font-bold uppercase tracking-[0.08em] text-white block">GitHub</span>
                     <span className="text-[11px] font-mono text-slate-400">@sriharshapn</span>
                   </div>
                 </div>
@@ -181,7 +181,7 @@ export const Contact: React.FC = () => {
                     <LinkedinIcon className="w-4 h-4 text-sky-400" />
                   </div>
                   <div>
-                    <span className="text-xs font-mono font-bold text-white block">LinkedIn</span>
+                    <span className="text-xs font-mono font-bold uppercase tracking-[0.08em] text-white block">LinkedIn</span>
                     <span className="text-[11px] font-mono text-slate-400">Connect Profile</span>
                   </div>
                 </div>
@@ -201,14 +201,14 @@ export const Contact: React.FC = () => {
           >
             <div className="p-6 sm:p-8 rounded-2xl bg-gradient-to-b from-slate-900/60 to-slate-950 border border-slate-800 space-y-5 shadow-xl">
               <div className="space-y-1">
-                <div className="flex items-center space-x-2 text-xs font-mono text-emerald-400 font-semibold">
+                <div className="flex items-center space-x-2 text-xs font-mono uppercase tracking-[0.12em] text-emerald-400 font-semibold">
                   <MessageSquare className="w-4 h-4" />
                   <span>COMPOSE DIRECT MESSAGE</span>
                 </div>
-                <h3 className="text-xl font-bold text-white tracking-tight">
+                <h3 className="text-xl font-bold text-white tracking-[-0.02em]">
                   Send a Direct Note
                 </h3>
-                <p className="text-xs text-slate-400 font-mono">
+                <p className="text-xs text-slate-400 font-sans">
                   This form formats and opens your system email application with your message pre-loaded.
                 </p>
               </div>
@@ -216,7 +216,7 @@ export const Contact: React.FC = () => {
               <form onSubmit={handleSubmit} className="space-y-4">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div className="space-y-1.5">
-                    <label htmlFor="name" className="text-xs font-mono text-slate-300 block">
+                    <label htmlFor="name" className="text-xs font-mono uppercase tracking-[0.08em] text-slate-300 block">
                       Your Name
                     </label>
                     <input
@@ -231,7 +231,7 @@ export const Contact: React.FC = () => {
                   </div>
 
                   <div className="space-y-1.5">
-                    <label htmlFor="subject" className="text-xs font-mono text-slate-300 block">
+                    <label htmlFor="subject" className="text-xs font-mono uppercase tracking-[0.08em] text-slate-300 block">
                       Subject
                     </label>
                     <input
@@ -247,7 +247,7 @@ export const Contact: React.FC = () => {
                 </div>
 
                 <div className="space-y-1.5">
-                  <label htmlFor="message" className="text-xs font-mono text-slate-300 block">
+                  <label htmlFor="message" className="text-xs font-mono uppercase tracking-[0.08em] text-slate-300 block">
                     Your Message
                   </label>
                   <textarea
@@ -264,7 +264,7 @@ export const Contact: React.FC = () => {
                 <MagneticButton pullFactor={0.15} className="w-full">
                   <button
                     type="submit"
-                    className="w-full py-3 px-5 rounded-xl bg-gradient-to-r from-emerald-600 to-emerald-500 hover:from-emerald-500 hover:to-teal-400 text-slate-950 font-bold text-xs font-mono tracking-wide transition-all flex items-center justify-center gap-2 shadow-lg shadow-emerald-950/40 active:scale-98 group/send"
+                    className="w-full py-3 px-5 rounded-xl bg-gradient-to-r from-emerald-600 to-emerald-500 hover:from-emerald-500 hover:to-teal-400 text-slate-950 font-bold text-xs font-mono uppercase tracking-[0.08em] transition-all flex items-center justify-center gap-2 shadow-lg shadow-emerald-950/40 active:scale-98 group/send"
                   >
                     <Send className="w-3.5 h-3.5 group-hover/send:translate-x-1 group-hover/send:-translate-y-0.5 transition-transform" />
                     <span>Launch Email Client to Send Message</span>
