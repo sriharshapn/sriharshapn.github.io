@@ -9,9 +9,8 @@ interface MatrixDot {
   vy: number;
   radius: number;
   baseAlpha: number;
-  phase: number;
-  phaseSpeed: number;
   depth: number;
+  colorType: 'white' | 'tint';
 }
 
 export const GlobalDotMatrix: React.FC = () => {
@@ -29,23 +28,30 @@ export const GlobalDotMatrix: React.FC = () => {
     let width = 0;
     let height = 0;
 
-    // Track mouse position globally in viewport coordinates
-    let mouseX = -9999;
-    let mouseY = -9999;
+    // Pointer coordinates
     let targetMouseX = -9999;
     let targetMouseY = -9999;
+    let mouseX = -9999;
+    let mouseY = -9999;
+    let glowX = -9999;
+    let glowY = -9999;
+    let glowIntensity = 0;
 
-    // Check reduced motion preference
+    // Check reduced motion preference & touch capability
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-    // Check if touch device
     const isTouchDevice = window.matchMedia('(pointer: coarse)').matches;
 
     // Repulsion physics parameters
-    const repelRadius = isTouchDevice ? 90 : 140;
-    const repelForce = isTouchDevice ? 28 : 42;
-    const springK = 0.055;
-    const damping = 0.82;
+    const repelRadius = isTouchDevice ? 85 : 135;
+    const repelForce = isTouchDevice ? 26 : 38;
+    const springK = 0.052;
+    const damping = 0.83;
+
+    // Track scroll velocity and normalized scroll progress
+    let lastTime = performance.now();
+    let lastScrollY = window.scrollY;
+    let scrollVelocity = 0;
+    let scrollProgress = 0;
 
     const initGrid = () => {
       const dpr = Math.min(window.devicePixelRatio || 1, 2);
@@ -59,10 +65,10 @@ export const GlobalDotMatrix: React.FC = () => {
 
       ctx.scale(dpr, dpr);
 
-      // Determine grid spacing based on viewport width (sparse, elegant density)
+      // Density tuned for sparse, elegant atmospheric aesthetic
       let spacing = 38;
       if (width < 768) {
-        spacing = 50; // lighter on mobile phones
+        spacing = 52; // lighter density on mobile
       } else if (width < 1200) {
         spacing = 44; // tablet
       }
@@ -79,29 +85,28 @@ export const GlobalDotMatrix: React.FC = () => {
           const originX = offsetX + c * spacing;
           const originY = offsetY + r * spacing;
 
-          // Subtle organic jitter to avoid mechanical stiffness
-          const jitterX = (Math.random() - 0.5) * (spacing * 0.25);
-          const jitterY = (Math.random() - 0.5) * (spacing * 0.25);
-          const finalOriginX = originX + jitterX;
-          const finalOriginY = originY + jitterY;
+          // Organic jitter to prevent mechanical computer-grid rigidity
+          const jitterX = (Math.random() - 0.5) * (spacing * 0.28);
+          const jitterY = (Math.random() - 0.5) * (spacing * 0.28);
+          const finalX = originX + jitterX;
+          const finalY = originY + jitterY;
 
-          // Vary dot size and opacity slightly to create atmospheric depth
-          const depth = Math.random() * 0.6 + 0.4; // 0.4 to 1.0
-          const radius = (Math.random() * 0.6 + 0.8) * (depth > 0.8 ? 1.15 : 0.9);
-          const baseAlpha = Math.random() * 0.2 + 0.12 * depth; // 0.12 - 0.32
+          // Optical depth: 0.35 to 1.0
+          const depth = Math.random() * 0.65 + 0.35;
+          const radius = (Math.random() * 0.55 + 0.75) * (depth > 0.75 ? 1.15 : 0.9);
+          const baseAlpha = (Math.random() * 0.16 + 0.12) * depth;
 
           dots.push({
-            originX: finalOriginX,
-            originY: finalOriginY,
-            x: finalOriginX,
-            y: finalOriginY,
+            originX: finalX,
+            originY: finalY,
+            x: finalX,
+            y: finalY,
             vx: 0,
             vy: 0,
             radius,
             baseAlpha,
-            phase: Math.random() * Math.PI * 2,
-            phaseSpeed: Math.random() * 0.015 + 0.008,
             depth,
+            colorType: 'white',
           });
         }
       }
@@ -109,7 +114,7 @@ export const GlobalDotMatrix: React.FC = () => {
 
     initGrid();
 
-    // Resize listener with debouncing
+    // Debounced Resize
     let resizeTimer: ReturnType<typeof setTimeout>;
     const handleResize = () => {
       clearTimeout(resizeTimer);
@@ -118,10 +123,16 @@ export const GlobalDotMatrix: React.FC = () => {
       }, 150);
     };
 
-    // Global Pointer Listeners
+    // Pointer Tracking
     const handlePointerMove = (e: PointerEvent) => {
       targetMouseX = e.clientX;
       targetMouseY = e.clientY;
+      if (glowX === -9999) {
+        glowX = e.clientX;
+        glowY = e.clientY;
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+      }
     };
 
     const handlePointerLeave = () => {
@@ -129,51 +140,106 @@ export const GlobalDotMatrix: React.FC = () => {
       targetMouseY = -9999;
     };
 
-    window.addEventListener('resize', handleResize);
-    window.addEventListener('pointermove', handlePointerMove, { passive: true });
-    window.addEventListener('pointerleave', handlePointerLeave, { passive: true });
-
-    let lastTime = performance.now();
-    let lastScrollY = window.scrollY;
-    let scrollVelocity = 0;
-
+    // Scroll Tracking
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
       const delta = currentScrollY - lastScrollY;
       lastScrollY = currentScrollY;
-      // Cap delta to prevent sudden jarring leaps on instant jump
-      const clampedDelta = Math.max(-60, Math.min(60, delta));
+
+      // Update scroll velocity with ceiling to avoid jarring snaps
+      const clampedDelta = Math.max(-55, Math.min(55, delta));
       scrollVelocity += clampedDelta * 0.35;
+
+      const maxScroll = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
+      scrollProgress = Math.max(0, Math.min(1, currentScrollY / maxScroll));
     };
 
+    window.addEventListener('resize', handleResize);
+    window.addEventListener('pointermove', handlePointerMove, { passive: true });
+    window.addEventListener('pointerleave', handlePointerLeave, { passive: true });
     window.addEventListener('scroll', handleScroll, { passive: true });
 
+    // Animation Loop
     const render = (time: number) => {
-      // Calculate delta time
       const dt = Math.min((time - lastTime) / 1000, 0.1);
       lastTime = time;
 
-      // Smooth cursor position interpolation
+      // Smooth cursor lerp: quick for repulsion, slightly delayed for fluid atmospheric glow
       if (targetMouseX === -9999) {
-        mouseX = -9999;
-        mouseY = -9999;
+        glowIntensity = Math.max(0, glowIntensity - dt * 1.5);
       } else {
-        mouseX += (targetMouseX - mouseX) * 0.2;
-        mouseY += (targetMouseY - mouseY) * 0.2;
+        glowIntensity = Math.min(1, glowIntensity + dt * 3.0);
+        
+        // Fast physics tracking
+        mouseX += (targetMouseX - mouseX) * 0.16;
+        mouseY += (targetMouseY - mouseY) * 0.16;
+
+        // Fluid delayed glow tracking
+        glowX += (targetMouseX - glowX) * 0.075;
+        glowY += (targetMouseY - glowY) * 0.075;
       }
 
-      // Damped decay of scroll inertia
+      // Scroll inertia decay
       scrollVelocity *= 0.91;
 
       ctx.clearRect(0, 0, width, height);
 
-      // Render dots
+      // ========================================================
+      // 1. Fluid Restrained Cursor Glow Wave (Canvas Layer)
+      // ========================================================
+      if (!prefersReducedMotion && glowIntensity > 0.01 && glowX !== -9999) {
+        const glowRadius = isTouchDevice ? 180 : 270;
+        
+        // Dynamic section color shift based on scroll progress:
+        // Top (Hero): Emerald/Cyan -> Mid (About/Projects): Violet/Cyan -> Bottom (Contact): Emerald/Teal
+        let c1 = '16, 185, 129'; // emerald
+        let c2 = '56, 189, 248'; // cyan
+        let c3 = '139, 92, 246'; // violet
+
+        if (scrollProgress < 0.25) {
+          // Hero
+          c1 = '16, 185, 129';
+          c2 = '56, 189, 248';
+          c3 = '139, 92, 246';
+        } else if (scrollProgress < 0.65) {
+          // About, Skills, Projects
+          c1 = '139, 92, 246';
+          c2 = '56, 189, 248';
+          c3 = '16, 185, 129';
+        } else {
+          // Academic, Events, Contact
+          c1 = '16, 185, 129';
+          c2 = '45, 212, 191';
+          c3 = '139, 92, 246';
+        }
+
+        const radGrad = ctx.createRadialGradient(glowX, glowY, 0, glowX, glowY, glowRadius);
+        const alphaMul = glowIntensity * 0.85;
+
+        radGrad.addColorStop(0, `rgba(${c1}, ${0.07 * alphaMul})`);
+        radGrad.addColorStop(0.35, `rgba(${c2}, ${0.045 * alphaMul})`);
+        radGrad.addColorStop(0.7, `rgba(${c3}, ${0.02 * alphaMul})`);
+        radGrad.addColorStop(1, 'rgba(0, 0, 0, 0)');
+
+        ctx.fillStyle = radGrad;
+        ctx.fillRect(glowX - glowRadius, glowY - glowRadius, glowRadius * 2, glowRadius * 2);
+      }
+
+      // ========================================================
+      // 2. Dots Rendering & Organic Physics Simulation
+      // ========================================================
       const numDots = dots.length;
+      const waveTime = time * 0.00065;
+
+      // Gentle wave direction rotation linked to scroll position
+      const scrollAngle = scrollProgress * Math.PI * 0.75;
+      const cosS = Math.cos(scrollAngle);
+      const sinS = Math.sin(scrollAngle);
+
       for (let i = 0; i < numDots; i++) {
         const dot = dots[i];
 
         if (prefersReducedMotion) {
-          // Static render for users with reduced motion preference
           ctx.beginPath();
           ctx.arc(dot.originX, dot.originY, dot.radius, 0, Math.PI * 2);
           ctx.fillStyle = `rgba(255, 255, 255, ${dot.baseAlpha})`;
@@ -181,20 +247,25 @@ export const GlobalDotMatrix: React.FC = () => {
           continue;
         }
 
-        // Ambient wave oscillation (subtle breathing drift even when cursor is stationary)
-        dot.phase += dot.phaseSpeed * dt * 60;
-        const waveX = Math.sin(dot.phase) * (1.8 * dot.depth);
-        const waveY = Math.cos(dot.phase * 1.3) * (1.8 * dot.depth);
+        // Multi-frequency harmonic wave: creates an organic, breathing undulating surface
+        const u = (dot.originX * cosS + dot.originY * sinS) * 0.0032;
+        const v = (-dot.originX * sinS + dot.originY * cosS) * 0.0032;
 
-        // React naturally to vertical scrolling based on particle optical depth
-        const scrollDisplacementY = -scrollVelocity * 0.16 * dot.depth;
+        const wave1 = Math.sin(u + waveTime) * Math.cos(v * 0.8 - waveTime * 0.5) * 2.6;
+        const wave2 = Math.sin((u + v) * 1.4 - waveTime * 0.7) * 1.6;
+        const waveOffset = (wave1 + wave2) * dot.depth;
 
-        let targetX = dot.originX + waveX;
-        let targetY = dot.originY + waveY + scrollDisplacementY;
+        // Scroll depth parallax & inertia displacement
+        const scrollParallaxY = (dot.depth - 0.6) * 14 * Math.sin(scrollProgress * Math.PI);
+        const scrollInertiaY = -scrollVelocity * 0.14 * dot.depth;
+
+        let targetX = dot.originX + waveOffset * 0.7;
+        let targetY = dot.originY + waveOffset + scrollParallaxY + scrollInertiaY;
         let currentAlpha = dot.baseAlpha;
+        let isGlowHighlighted = false;
 
         // Cursor Repulsion calculation
-        if (mouseX !== -9999 && mouseY !== -9999) {
+        if (targetMouseX !== -9999 && mouseX !== -9999) {
           const dx = dot.x - mouseX;
           const dy = dot.y - mouseY;
           const distSq = dx * dx + dy * dy;
@@ -202,7 +273,7 @@ export const GlobalDotMatrix: React.FC = () => {
 
           if (distSq < repelRadiusSq && distSq > 0.0001) {
             const dist = Math.sqrt(distSq);
-            // Smooth quadratic falloff: strong near center, vanishing at perimeter
+            // Soft quadratic falloff: strong near core, smoothly zero at boundary
             const factor = 1 - dist / repelRadius;
             const force = factor * factor * repelForce;
 
@@ -212,12 +283,13 @@ export const GlobalDotMatrix: React.FC = () => {
             targetX += pushX;
             targetY += pushY;
 
-            // Subtle glow boost for dots directly in the cursor's proximity aura
-            currentAlpha = Math.min(0.85, dot.baseAlpha + factor * 0.35);
+            // Restrained highlight: luminous dot aura that doesn't overpower text
+            currentAlpha = Math.min(0.82, dot.baseAlpha + factor * 0.42);
+            isGlowHighlighted = factor > 0.25;
           }
         }
 
-        // Spring acceleration towards dynamic target
+        // Physical spring acceleration toward target
         const ax = (targetX - dot.x) * springK;
         const ay = (targetY - dot.y) * springK;
 
@@ -227,10 +299,15 @@ export const GlobalDotMatrix: React.FC = () => {
         dot.x += dot.vx;
         dot.y += dot.vy;
 
-        // Draw dot
+        // Draw dot with subtle chromatic tinting near cursor glow
         ctx.beginPath();
         ctx.arc(dot.x, dot.y, dot.radius, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(255, 255, 255, ${currentAlpha})`;
+        
+        if (isGlowHighlighted) {
+          ctx.fillStyle = `rgba(224, 247, 255, ${currentAlpha})`;
+        } else {
+          ctx.fillStyle = `rgba(255, 255, 255, ${currentAlpha})`;
+        }
         ctx.fill();
       }
 

@@ -14,6 +14,12 @@ import { CustomCursor } from './components/CustomCursor';
 import { BackgroundAmbient } from './components/BackgroundAmbient';
 import { GlobalDotMatrix } from './components/GlobalDotMatrix';
 import { SmoothScroll } from './components/SmoothScroll';
+import { 
+  HeroMarquee, 
+  SkillsMarquee, 
+  ProjectsMarquee, 
+  ContactMarquee 
+} from './components/EditorialMarquee';
 
 export const App: React.FC = () => {
   return (
@@ -34,15 +40,34 @@ export const App: React.FC = () => {
         {/* Navigation */}
         <Navbar />
 
-        {/* Main Content Sections */}
+        {/* Main Content Sections with Kinetic Editorial Marquees */}
         <main className="relative z-10">
           <Hero />
+
+          {/* Marquee 1 — After Hero */}
+          <HeroMarquee />
+
           <About />
+
+          {/* Marquee 2 — Between About and Skills */}
+          <SkillsMarquee />
+
           <Skills />
+
+          {/* Marquee 3 — Before Featured Projects */}
+          <ProjectsMarquee />
+
           <Projects />
+
           <AcademicWork />
+
           <Events />
+
           <GitHubStats />
+
+          {/* Marquee 4 — Before Contact */}
+          <ContactMarquee />
+
           <Contact />
         </main>
 

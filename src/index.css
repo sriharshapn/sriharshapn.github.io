@@ -114,6 +114,55 @@ body {
   animation: float-reverse 22s ease-in-out infinite;
 }
 
+/* Kinetic Editorial Marquee Animations */
+@keyframes marquee-left {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+@keyframes marquee-right {
+  0% {
+    transform: translate3d(-50%, 0, 0);
+  }
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.animate-marquee-left {
+  display: flex;
+  width: max-content;
+  animation: marquee-left var(--marquee-duration, 30s) linear infinite;
+  will-change: transform;
+}
+
+.animate-marquee-right {
+  display: flex;
+  width: max-content;
+  animation: marquee-right var(--marquee-duration, 30s) linear infinite;
+  will-change: transform;
+}
+
+.pause-on-hover:hover {
+  animation-play-state: paused;
+}
+
+/* Editorial outlined typography for Marquee 3 */
+.text-stroke-white {
+  color: transparent;
+  -webkit-text-stroke: 1.2px rgba(255, 255, 255, 0.45);
+  text-stroke: 1.2px rgba(255, 255, 255, 0.45);
+}
+
+.text-stroke-white:hover {
+  -webkit-text-stroke: 1.2px rgba(52, 211, 153, 0.7);
+  text-stroke: 1.2px rgba(52, 211, 153, 0.7);
+}
+
 /* Respect reduced motion */
 @media (prefers-reduced-motion: reduce) {
   *,
