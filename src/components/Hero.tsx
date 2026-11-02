@@ -1,45 +1,45 @@
 import React from 'react';
-import { ArrowDown, MapPin, GraduationCap, ArrowRight } from 'lucide-react';
+import { ArrowDown, MapPin, GraduationCap, ArrowRight, Terminal } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { personalInfo } from '../data/portfolioData';
-import { HeroVisual } from './HeroVisual';
 import { GithubIcon } from './SocialIcons';
 import { MagneticButton } from './MagneticButton';
 
 export const Hero: React.FC = () => {
   return (
-    <section id="home" className="relative min-h-[640px] lg:min-h-[780px] pt-24 pb-16 lg:pt-32 lg:pb-20 flex items-center justify-center overflow-hidden">
-      {/* Background ambient lighting */}
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[700px] h-[450px] bg-gradient-to-tr from-emerald-500/10 via-violet-600/10 to-transparent blur-[140px] pointer-events-none rounded-full" />
-      <div className="absolute -top-10 left-10 w-72 h-72 bg-emerald-500/5 blur-[100px] pointer-events-none rounded-full" />
-      <div className="absolute top-1/2 right-10 w-80 h-80 bg-violet-600/5 blur-[120px] pointer-events-none rounded-full" />
+    <section 
+      id="home" 
+      className="relative min-h-[85vh] lg:min-h-[92vh] pt-28 pb-20 lg:pt-36 lg:pb-24 flex items-center justify-center overflow-hidden"
+    >
+      {/* Soft atmospheric ambient glow */}
+      <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[650px] h-[400px] bg-gradient-to-tr from-emerald-500/8 via-violet-600/8 to-transparent blur-[140px] pointer-events-none rounded-full" />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-8 items-center">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 w-full relative z-10 text-center lg:text-left">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
           
-          {/* Left Column: Hero Content with Staggered Motion Entrance */}
-          <div className="lg:col-span-7 space-y-6 text-left">
+          {/* Main Hero Column */}
+          <div className="lg:col-span-8 space-y-7">
             
-            {/* Status Pills */}
+            {/* Status & Identity Pills */}
             <motion.div
-              initial={{ opacity: 0, y: 15 }}
+              initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-              className="inline-flex flex-wrap items-center gap-2"
+              className="flex flex-wrap items-center justify-center lg:justify-start gap-2.5"
             >
-              <div className="inline-flex items-center space-x-2 px-3 py-1.5 rounded-full bg-slate-900/90 border border-slate-800 text-xs text-slate-300 font-mono backdrop-blur-md shadow-xs">
+              <div className="inline-flex items-center space-x-2 px-3 py-1.5 rounded-full bg-zinc-900/90 border border-zinc-800 text-xs text-zinc-300 font-mono backdrop-blur-md shadow-xs">
                 <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
                 <span className="text-emerald-300 font-semibold">{personalInfo.title}</span>
               </div>
 
-              <div className="inline-flex items-center space-x-1.5 px-3 py-1.5 rounded-full bg-slate-900/80 border border-slate-800 text-xs text-slate-400 font-mono">
+              <div className="inline-flex items-center space-x-1.5 px-3 py-1.5 rounded-full bg-zinc-900/80 border border-zinc-800 text-xs text-zinc-400 font-mono">
                 <GraduationCap className="w-3.5 h-3.5 text-violet-400" />
                 <span>{personalInfo.collegeShort}</span>
               </div>
 
-              <div className="inline-flex items-center space-x-1.5 px-3 py-1.5 rounded-full bg-slate-900/80 border border-slate-800 text-xs text-slate-400 font-mono">
-                <MapPin className="w-3.5 h-3.5 text-slate-500" />
-                <span>Bengaluru</span>
+              <div className="inline-flex items-center space-x-1.5 px-3 py-1.5 rounded-full bg-zinc-900/80 border border-zinc-800 text-xs text-zinc-400 font-mono">
+                <MapPin className="w-3.5 h-3.5 text-zinc-500" />
+                <span>Bengaluru, India</span>
               </div>
             </motion.div>
 
@@ -50,11 +50,12 @@ export const Hero: React.FC = () => {
               transition={{ duration: 0.6, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
               className="space-y-3"
             >
-              <h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-white leading-tight">
-                <span className="block text-slate-100">Sri Harsha</span>
-                <span className="block text-slate-100">Penugondla Nagaraja</span>
+              <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight text-white leading-[1.08]">
+                <span className="block text-zinc-100">Sri Harsha</span>
+                <span className="block text-zinc-100">Penugondla Nagaraja</span>
               </h1>
-              <p className="text-lg sm:text-xl lg:text-2xl font-semibold bg-gradient-to-r from-emerald-400 via-teal-300 to-violet-400 bg-clip-text text-transparent">
+              
+              <p className="text-lg sm:text-2xl lg:text-3xl font-semibold bg-gradient-to-r from-emerald-400 via-teal-300 to-violet-400 bg-clip-text text-transparent pt-1">
                 "{personalInfo.heroSubtitle}"
               </p>
             </motion.div>
@@ -64,10 +65,12 @@ export const Hero: React.FC = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
-              className="text-slate-300 text-sm sm:text-base lg:text-lg leading-relaxed max-w-2xl font-normal"
+              className="text-zinc-300 text-sm sm:text-base lg:text-lg leading-relaxed max-w-2xl font-normal mx-auto lg:mx-0"
             >
-              Artificial Intelligence and Machine Learning engineering student at <span className="text-slate-100 font-medium">BMSCE Bengaluru</span>.
-              Passionate about bridging AI models with production-grade engineering—spanning computer vision, OCR, scalable backend architectures, and physics simulations.
+              Artificial Intelligence and Machine Learning engineering student at{' '}
+              <span className="text-white font-medium">BMSCE Bengaluru</span>.
+              Passionate about building intelligent applications and exploring the intersection of AI,
+              computer vision, scalable backend engineering and real-world software solutions.
             </motion.p>
 
             {/* CTAs and Links with Magnetic Attraction */}
@@ -75,12 +78,12 @@ export const Hero: React.FC = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
-              className="pt-2 flex flex-wrap items-center gap-3 sm:gap-4"
+              className="pt-2 flex flex-wrap items-center justify-center lg:justify-start gap-3 sm:gap-4"
             >
               <MagneticButton pullFactor={0.22} className="w-full sm:w-auto">
                 <a
                   href="#projects"
-                  className="w-full sm:w-auto text-center px-6 py-3.5 rounded-xl bg-gradient-to-r from-emerald-500 to-emerald-400 hover:from-emerald-400 hover:to-teal-300 text-slate-950 font-bold text-sm tracking-wide transition-all shadow-lg shadow-emerald-950/40 hover:shadow-emerald-500/30 active:scale-95 flex items-center justify-center gap-2 group"
+                  className="w-full sm:w-auto text-center px-7 py-3.5 rounded-xl bg-gradient-to-r from-emerald-500 to-emerald-400 hover:from-emerald-400 hover:to-teal-300 text-zinc-950 font-bold text-sm tracking-wide transition-all shadow-lg shadow-emerald-950/40 hover:shadow-emerald-500/30 active:scale-95 flex items-center justify-center gap-2 group"
                 >
                   <span>View Projects</span>
                   <ArrowRight className="w-4 h-4 group-hover:translate-x-1.5 transition-transform duration-200" />
@@ -90,7 +93,7 @@ export const Hero: React.FC = () => {
               <MagneticButton pullFactor={0.22} className="w-full sm:w-auto">
                 <a
                   href="#contact"
-                  className="w-full sm:w-auto text-center px-6 py-3.5 rounded-xl bg-slate-900/90 hover:bg-slate-800/90 border border-slate-800 hover:border-slate-700 text-slate-200 font-semibold text-sm tracking-wide transition-all active:scale-95 shadow-sm inline-block"
+                  className="w-full sm:w-auto text-center px-6 py-3.5 rounded-xl bg-zinc-900/90 hover:bg-zinc-800/90 border border-zinc-800 hover:border-zinc-700 text-zinc-200 font-semibold text-sm tracking-wide transition-all active:scale-95 shadow-sm inline-block"
                 >
                   Contact Me
                 </a>
@@ -102,7 +105,7 @@ export const Hero: React.FC = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="GitHub Profile"
-                  className="w-full sm:w-auto px-5 py-3.5 rounded-xl bg-slate-950/80 hover:bg-slate-900 border border-slate-800 hover:border-slate-700 text-slate-300 hover:text-white font-mono text-sm tracking-tight transition-all flex items-center justify-center gap-2.5 group"
+                  className="w-full sm:w-auto px-5 py-3.5 rounded-xl bg-zinc-950/90 hover:bg-zinc-900 border border-zinc-800 hover:border-zinc-700 text-zinc-300 hover:text-white font-mono text-sm tracking-tight transition-all flex items-center justify-center gap-2.5 group"
                 >
                   <GithubIcon className="w-4 h-4 text-emerald-400 group-hover:scale-110 transition-transform" />
                   <span>github.com/sriharshapn</span>
@@ -110,62 +113,89 @@ export const Hero: React.FC = () => {
               </MagneticButton>
             </motion.div>
 
-            {/* Engineering Highlights Quick Bar */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
-              className="pt-6 border-t border-slate-800/70 grid grid-cols-3 gap-4 max-w-xl"
-            >
-              <div className="p-3 rounded-xl bg-slate-900/20 hover:bg-slate-900/40 border border-transparent hover:border-slate-800 transition-colors">
-                <div className="text-xl sm:text-2xl font-mono font-bold text-white flex items-center gap-1">
-                  <span>6</span>
-                  <span className="text-emerald-400 text-lg">+</span>
+          </div>
+
+          {/* Right Column: Clean Telemetry Overview (Integrated with no rectangular box) */}
+          <motion.div
+            initial={{ opacity: 0, x: 24 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.7, delay: 0.25, ease: [0.22, 1, 0.36, 1] }}
+            className="lg:col-span-4 space-y-4 text-left"
+          >
+            {/* Engineering Highlights Quick Panel */}
+            <div className="p-6 rounded-2xl bg-zinc-950/70 border border-zinc-800/80 backdrop-blur-md space-y-5 shadow-xl">
+              <div className="flex items-center justify-between text-xs font-mono text-zinc-400 pb-3 border-b border-zinc-800/80">
+                <span className="flex items-center gap-1.5 text-lime-400">
+                  <Terminal className="w-3.5 h-3.5" />
+                  <span>PROFILE SNAPSHOT</span>
+                </span>
+                <span className="text-[11px] text-zinc-500">2026</span>
+              </div>
+
+              <div className="space-y-4 text-xs font-mono">
+                <div className="flex items-start justify-between">
+                  <span className="text-zinc-400">Specialization</span>
+                  <span className="text-zinc-200 font-semibold text-right">AI & Machine Learning</span>
                 </div>
-                <div className="text-xs text-slate-400 font-mono uppercase tracking-wider mt-0.5">
+
+                <div className="flex items-start justify-between">
+                  <span className="text-zinc-400">Institution</span>
+                  <span className="text-zinc-200 font-semibold text-right">BMSCE Bengaluru</span>
+                </div>
+
+                <div className="flex items-start justify-between">
+                  <span className="text-zinc-400">Hackathon Focus</span>
+                  <span className="text-emerald-400 font-semibold text-right">SIH 2026 Metrology</span>
+                </div>
+
+                <div className="flex items-start justify-between">
+                  <span className="text-zinc-400">Core Systems</span>
+                  <span className="text-zinc-200 font-semibold text-right">CV, FastAPI, PyTorch</span>
+                </div>
+              </div>
+
+              {/* Status Indicator */}
+              <div className="pt-3 border-t border-zinc-800/80 flex items-center justify-between text-[11px] font-mono">
+                <span className="text-zinc-500 flex items-center gap-1.5">
+                  <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                  SYSTEM ACTIVE
+                </span>
+                <span className="text-zinc-400">BENGALURU // IN</span>
+              </div>
+            </div>
+
+            {/* Quick Metrics Bar */}
+            <div className="grid grid-cols-2 gap-3">
+              <div className="p-3.5 rounded-xl bg-zinc-950/50 border border-zinc-800/80 backdrop-blur-sm">
+                <div className="text-2xl font-mono font-bold text-white flex items-center gap-1">
+                  <span>6</span>
+                  <span className="text-emerald-400 text-base">+</span>
+                </div>
+                <div className="text-[11px] text-zinc-400 font-mono mt-0.5">
                   Featured Projects
                 </div>
               </div>
 
-              <div className="p-3 rounded-xl bg-slate-900/20 hover:bg-slate-900/40 border border-transparent hover:border-slate-800 transition-colors">
-                <div className="text-xl sm:text-2xl font-mono font-bold text-white flex items-center gap-1">
+              <div className="p-3.5 rounded-xl bg-zinc-950/50 border border-zinc-800/80 backdrop-blur-sm">
+                <div className="text-2xl font-mono font-bold text-white flex items-center gap-1">
                   <span>3</span>
-                  <span className="text-violet-400 text-lg">+</span>
+                  <span className="text-violet-400 text-base">+</span>
                 </div>
-                <div className="text-xs text-slate-400 font-mono uppercase tracking-wider mt-0.5">
+                <div className="text-[11px] text-zinc-400 font-mono mt-0.5">
                   Hackathon Events
                 </div>
               </div>
+            </div>
 
-              <div className="p-3 rounded-xl bg-slate-900/20 hover:bg-slate-900/40 border border-transparent hover:border-slate-800 transition-colors">
-                <div className="text-xl sm:text-2xl font-mono font-bold text-white flex items-center gap-1">
-                  <span>BMSCE</span>
-                </div>
-                <div className="text-xs text-slate-400 font-mono uppercase tracking-wider mt-0.5">
-                  AI & ML Dept
-                </div>
-              </div>
-            </motion.div>
-
-          </div>
-
-          {/* Right Column: Subtle Animated Visual Element */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.96 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8, delay: 0.25, ease: [0.22, 1, 0.36, 1] }}
-            className="lg:col-span-5 w-full"
-          >
-            <HeroVisual />
           </motion.div>
 
         </div>
 
         {/* Scroll down indicator */}
-        <div className="mt-10 lg:mt-14 flex justify-center">
+        <div className="mt-14 lg:mt-20 flex justify-center">
           <a
             href="#about"
-            className="inline-flex items-center gap-2 text-xs font-mono text-slate-500 hover:text-emerald-400 transition-colors p-2 rounded-full focus:outline-none focus:ring-1 focus:ring-emerald-500 group"
+            className="inline-flex items-center gap-2 text-xs font-mono text-zinc-500 hover:text-emerald-400 transition-colors p-2 rounded-full focus:outline-none focus:ring-1 focus:ring-emerald-500 group"
             aria-label="Scroll to About section"
           >
             <span className="group-hover:tracking-wider transition-all">DISCOVER MORE</span>

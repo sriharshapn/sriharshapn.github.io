@@ -12,17 +12,21 @@ import { Footer } from './components/Footer';
 import { ScrollProgress } from './components/ScrollProgress';
 import { CustomCursor } from './components/CustomCursor';
 import { BackgroundAmbient } from './components/BackgroundAmbient';
+import { GlobalDotMatrix } from './components/GlobalDotMatrix';
 
 export const App: React.FC = () => {
   return (
-    <div className="relative min-h-screen bg-[#080B11] text-slate-100 selection:bg-emerald-500/30 selection:text-emerald-200 overflow-x-hidden">
+    <div className="relative min-h-screen bg-[#080B11] text-zinc-100 selection:bg-emerald-500/30 selection:text-emerald-200 overflow-x-hidden">
       {/* Top scroll progress indicator */}
       <ScrollProgress />
+
+      {/* Continuous full-page interactive dot-matrix background across the entire portfolio */}
+      <GlobalDotMatrix />
 
       {/* Desktop custom cursor & mouse follower spotlight */}
       <CustomCursor />
 
-      {/* Background ambient lighting and subtle tech grid */}
+      {/* Background ambient lighting */}
       <BackgroundAmbient />
 
       {/* Navigation */}

@@ -28,8 +28,6 @@ export const About: React.FC = () => {
       <div className="absolute top-1/4 left-1/12 w-96 h-96 bg-emerald-500/5 blur-[140px] pointer-events-none rounded-full" />
       <div className="absolute bottom-1/4 right-1/12 w-96 h-96 bg-violet-600/5 blur-[140px] pointer-events-none rounded-full" />
       
-      {/* Subtle tech grid watermark */}
-      <div className="absolute inset-0 bg-tech-grid opacity-30 pointer-events-none bg-radial-vignette" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
