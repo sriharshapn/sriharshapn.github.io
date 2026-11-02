@@ -32,7 +32,7 @@ export const App: React.FC = () => {
 
   return (
     <SmoothScroll>
-      <div className="relative min-h-screen bg-[#080B11] text-zinc-100 selection:bg-emerald-500/30 selection:text-emerald-200 overflow-x-hidden">
+      <div className="relative min-h-screen bg-[#080B11] text-zinc-100 selection:bg-emerald-500/30 selection:text-emerald-200 overflow-x-clip">
         {/* Cinematic Landing Page Graduation Cap Intro */}
         {!introComplete && (
           <CinematicIntro onComplete={() => setIntroComplete(true)} />
