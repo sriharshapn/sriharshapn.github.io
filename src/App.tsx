@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
 import { About } from './components/About';
@@ -20,11 +20,24 @@ import {
   ProjectsMarquee, 
   ContactMarquee 
 } from './components/EditorialMarquee';
+import { CinematicIntro } from './components/intro/CinematicIntro';
 
 export const App: React.FC = () => {
+  const [introComplete, setIntroComplete] = useState<boolean>(() => {
+    if (typeof window === 'undefined') return true;
+    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReduced) return true;
+    return sessionStorage.getItem('portfolio_intro_seen') === 'true';
+  });
+
   return (
     <SmoothScroll>
       <div className="relative min-h-screen bg-[#080B11] text-zinc-100 selection:bg-emerald-500/30 selection:text-emerald-200 overflow-x-hidden">
+        {/* Cinematic Landing Page Graduation Cap Intro */}
+        {!introComplete && (
+          <CinematicIntro onComplete={() => setIntroComplete(true)} />
+        )}
+
         {/* Top scroll progress indicator */}
         <ScrollProgress />
 
