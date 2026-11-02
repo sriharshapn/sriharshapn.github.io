@@ -20,7 +20,6 @@ export const CinematicIntro: React.FC<CinematicIntroProps> = ({ onComplete }) =>
   const [showCapIcon, setShowCapIcon] = useState<boolean>(false);
   const [textOpacity, setTextOpacity] = useState<number>(1);
   const [revealRadius, setRevealRadius] = useState<number>(0);
-  const [overlayOpacity, setOverlayOpacity] = useState<number>(1);
 
   const fullText = '> building my future...';
 
@@ -36,10 +35,10 @@ export const CinematicIntro: React.FC<CinematicIntroProps> = ({ onComplete }) =>
       sceneRef.current = new GraduationCapScene(canvasContainerRef.current);
     }
 
-    // Cursor blinking interval for Scene 1
+    // Cursor blinking interval for Scene 1 & 2
     const blinkInterval = setInterval(() => {
       setCursorVisible((prev) => !prev);
-    }, 400);
+    }, 350);
 
     const animState = {
       typedIndex: 0,
@@ -47,14 +46,13 @@ export const CinematicIntro: React.FC<CinematicIntroProps> = ({ onComplete }) =>
       revealR: 0,
     };
 
-    // Calculate maximum radius to fully clear screen corners
-    const maxRadius = Math.ceil(
-      Math.hypot(window.innerWidth, window.innerHeight) * 0.95
-    );
+    // Calculate maximum radius to cleanly clear the farthest corner of any screen size
+    const cornerDistance = Math.hypot(window.innerWidth / 2, window.innerHeight / 2);
+    const maxRadius = Math.ceil(cornerDistance * 1.15);
 
     // Initial radius matching the circular underside opening of the cap
     const initialOpeningRadius = Math.round(
-      Math.min(window.innerWidth, window.innerHeight) * 0.15
+      Math.min(window.innerWidth, window.innerHeight) * 0.16
     );
 
     // Coordinated GSAP timeline for complete intro sequence
@@ -66,40 +64,41 @@ export const CinematicIntro: React.FC<CinematicIntroProps> = ({ onComplete }) =>
     timelineRef.current = tl;
 
     // ========================================================
-    // SCENE 1 — SINGLE LINE OF CODE (0.0s – 1.8s)
-    // Types character by character in dead center of black screen
+    // SCENE 1 — CRISP CODE TYPING (0.0s – 1.35s)
+    // Starts immediately (no empty black pause). Types full line in center.
     // ========================================================
     tl.to(animState, {
       typedIndex: fullText.length,
-      duration: 1.6,
+      duration: 1.25,
+      delay: 0.1,
       ease: 'none',
       onUpdate: () => {
-        const count = Math.floor(animState.typedIndex);
+        const count = Math.min(Math.floor(animState.typedIndex), fullText.length);
         setTypedText(fullText.slice(0, count));
       },
     });
 
-    // Hold briefly with cursor at the end
-    tl.to({}, { duration: 0.25 });
+    // Hold briefly with cursor blinking so visitor can read the full text
+    tl.to({}, { duration: 0.35 });
 
     // ========================================================
-    // SCENE 2 — LINE-ART GRADUATION CAP APPEARS (1.85s – 2.65s)
-    // Minimalist 2D vector line-art cap appears at the end of the typed line
+    // SCENE 2 — MINIMALIST 2D LINE-ART CAP APPEARS (1.7s – 2.35s)
+    // Clean vector graduation cap appears at the end of the line
     // ========================================================
     tl.call(() => {
       setShowCapIcon(true);
-      setCursorVisible(false);
     });
 
-    tl.to({}, { duration: 0.75 });
+    // Hold line-art cap with typed text
+    tl.to({}, { duration: 0.65 });
 
     // ========================================================
-    // SCENE 3 — LINE-ART TRANSFORMS INTO REALISTIC 3D CAP (2.65s – 4.25s)
-    // Line-art lifts away, Three.js 3D cap fades in & morphs wireframe to solid
+    // SCENE 3 — LINE-ART LIFTS & MORPHS INTO 3D CAP (2.35s – 3.75s)
+    // Text smoothly fades out, 3D cap fades in & morphs from white line-art to solid black
     // ========================================================
     tl.to(animState, {
       textAlpha: 0,
-      duration: 0.45,
+      duration: 0.4,
       ease: 'power2.in',
       onUpdate: () => {
         setTextOpacity(animState.textAlpha);
@@ -109,74 +108,79 @@ export const CinematicIntro: React.FC<CinematicIntroProps> = ({ onComplete }) =>
     if (sceneRef.current) {
       const capScene = sceneRef.current;
 
-      // Fade in 3D scene and lift/scale cap
+      // 3D scene fades in and scales smoothly into position
       tl.to(capScene.state, {
         sceneOpacity: 1.0,
-        capScale: 0.9,
+        capScale: 0.88,
         capY: 0.15,
-        rotX: -0.35,
-        rotY: 0.85,
-        rotZ: 0.12,
-        duration: 0.8,
+        rotX: -0.32,
+        rotY: 0.75,
+        rotZ: 0.1,
+        duration: 0.85,
         ease: 'power2.out',
-      }, 'scene3_start+=0.1');
+      }, 'scene3_start+=0.05');
 
-      // Morph wireframe to solid during movement
+      // Morph line-art wireframe into realistic solid black fabric
       tl.to(capScene.state, {
         wireframeToSolid: 1.0,
-        duration: 1.2,
+        duration: 1.05,
         ease: 'power1.inOut',
-      }, 'scene3_start+=0.2');
+      }, 'scene3_start+=0.15');
 
       // ========================================================
-      // SCENE 4 — CAP THROW AND SETTLEMENT (4.25s – 5.65s)
-      // Celebratory toss in close foreground; circular underside faces camera directly
+      // SCENE 4 — CELEBRATORY TOSS & SETTLEMENT (3.75s – 5.15s)
+      // Cap tosses in foreground and settles with circular underside directly facing camera
       // ========================================================
-      // Upward toss arc
+      // Upward celebratory toss arc
       tl.to(capScene.state, {
-        capY: 1.05,
-        capZ: 0.35,
-        rotY: Math.PI * 1.35,
-        rotZ: 0.2,
+        capY: 0.85,
+        capZ: 0.2,
+        rotY: Math.PI * 1.25,
+        rotZ: 0.15,
         duration: 0.65,
         ease: 'power2.out',
       }, 'toss_peak');
 
-      // Settle down in foreground with underside facing directly towards camera
-      // rotX = -Math.PI / 2 points circular underside directly at camera!
+      // Settle down in close foreground with underside facing directly towards camera
+      // rotX = -Math.PI / 2 aligns the circular cavity directly towards the camera!
       tl.to(capScene.state, {
+        capX: 0.0,
         capY: 0.0,
-        capZ: 0.25,
-        rotX: -Math.PI / 2, // Circular underside directly facing camera
-        rotY: Math.PI * 2.0,
+        capZ: 0.0,
+        rotX: -Math.PI / 2, // Circular underside facing camera directly
+        rotY: 0.0,
         rotZ: 0.0,
-        capScale: 1.08, // Underside occupies approximately 28-32% of viewport
+        capScale: 0.95,     // Proportional, circular opening occupies ~28-32% of viewport
         duration: 0.75,
         ease: 'power2.inOut',
       }, 'toss_settle');
 
-      // Hold settlement position briefly so circular opening is clearly perceived
-      tl.to({}, { duration: 0.3 });
+      // Hold steady settlement position briefly so the circular opening is clearly recognized
+      tl.to({}, { duration: 0.45 });
 
       // ========================================================
-      // SCENE 5 — CAMERA ENTERS THE CAP & CIRCULAR WEBSITE REVEAL (5.95s – 7.35s)
-      // Camera zooms straight into circular underside; circular cutout expands
+      // SCENE 5 — CONTINUOUS FORWARD CAMERA PUSH & EXPANDING CIRCULAR WEBSITE REVEAL (5.6s – 7.2s)
+      // Camera moves continuously towards the center of the underside;
+      // circular mask expands beyond all 4 corners to reveal the website
       // ========================================================
-      // Camera zooms directly into the center of the underside
+      // Continuous camera push straight through the circular opening
       tl.to(capScene.state, {
-        camZ: 1.15,
-        duration: 1.4,
+        camZ: 0.2,
+        duration: 1.5,
         ease: 'power2.in',
       }, 'camera_enter');
 
-      // Expand circular cutout mask from the center of the underside
-      tl.fromTo(
+      // Circular cutout mask begins at center of underside opening and expands past screen corners
+      tl.to(
         animState,
-        { revealR: initialOpeningRadius },
         {
           revealR: maxRadius,
-          duration: 1.4,
+          duration: 1.5,
           ease: 'power2.inOut',
+          onStart: () => {
+            animState.revealR = initialOpeningRadius;
+            setRevealRadius(initialOpeningRadius);
+          },
           onUpdate: () => {
             setRevealRadius(animState.revealR);
           },
@@ -184,14 +188,15 @@ export const CinematicIntro: React.FC<CinematicIntroProps> = ({ onComplete }) =>
         'camera_enter'
       );
 
-      // Fade out overlay cleanly as circle clears viewport
-      tl.to(animState, {
-        duration: 0.25,
+      // Fade out 3D cap only after camera has passed through its plane
+      tl.to(capScene.state, {
+        sceneOpacity: 0.0,
+        duration: 0.45,
         ease: 'power1.out',
-        onStart: () => {
-          setOverlayOpacity(0);
-        },
-      }, 'camera_enter+=1.2');
+      }, 'camera_enter+=0.95');
+
+      // Hold a moment with the mask fully beyond corners before unmounting
+      tl.to({}, { duration: 0.1 });
     }
 
     return () => {
@@ -239,17 +244,16 @@ export const CinematicIntro: React.FC<CinematicIntroProps> = ({ onComplete }) =>
   return (
     <div
       ref={containerRef}
-      className="fixed inset-0 z-50 pointer-events-auto bg-[#080B11] flex items-center justify-center overflow-hidden transition-opacity duration-300"
+      className="fixed inset-0 z-50 pointer-events-auto bg-[#080B11] flex items-center justify-center overflow-hidden"
       style={{
-        opacity: overlayOpacity,
-        // Circular cutout mask: inside radius is transparent (revealing the website!), outside is opaque intro overlay
+        // Continuous circular cutout mask: inside radius is transparent (revealing real website!), outside is opaque
         WebkitMaskImage:
           revealRadius > 0
-            ? `radial-gradient(circle at 50% 50%, transparent 0px, transparent ${revealRadius}px, black ${revealRadius + 2}px, black 100%)`
+            ? `radial-gradient(circle at 50% 50%, transparent 0px, transparent ${revealRadius}px, rgba(255, 255, 255, 0.06) ${revealRadius + 1}px, black ${revealRadius + 2}px, black 100%)`
             : undefined,
         maskImage:
           revealRadius > 0
-            ? `radial-gradient(circle at 50% 50%, transparent 0px, transparent ${revealRadius}px, black ${revealRadius + 2}px, black 100%)`
+            ? `radial-gradient(circle at 50% 50%, transparent 0px, transparent ${revealRadius}px, rgba(255, 255, 255, 0.06) ${revealRadius + 1}px, black ${revealRadius + 2}px, black 100%)`
             : undefined,
       }}
       aria-label="Cinematic Graduation Cap Introduction"
@@ -260,25 +264,8 @@ export const CinematicIntro: React.FC<CinematicIntroProps> = ({ onComplete }) =>
         className="absolute inset-0 w-full h-full pointer-events-none z-10"
       />
 
-      {/* Luminous Expanding Rim Accent Ring */}
-      {revealRadius > 30 && revealRadius < Math.min(window.innerWidth, window.innerHeight) * 0.9 && (
-        <div
-          className="absolute pointer-events-none rounded-full z-15"
-          style={{
-            left: '50%',
-            top: '50%',
-            width: `${revealRadius * 2}px`,
-            height: `${revealRadius * 2}px`,
-            transform: 'translate(-50%, -50%)',
-            boxShadow: '0 0 24px rgba(16, 185, 129, 0.45), inset 0 0 12px rgba(255, 255, 255, 0.35)',
-            border: '1.5px solid rgba(16, 185, 129, 0.65)',
-          }}
-          aria-hidden="true"
-        />
-      )}
-
-      {/* Scene 1 & 2: Center Code Typing & Line-Art Cap */}
-      <div className="absolute inset-0 flex items-center justify-center z-20 pointer-events-none">
+      {/* Scene 1 & 2: Center Code Typing & Minimal Line-Art Cap */}
+      <div className="absolute inset-0 flex items-center justify-center z-20 pointer-events-none px-4">
         <CodeTyping
           text={typedText}
           cursorVisible={cursorVisible}
@@ -288,14 +275,14 @@ export const CinematicIntro: React.FC<CinematicIntroProps> = ({ onComplete }) =>
         />
       </div>
 
-      {/* Minimal Skip Intro Button */}
+      {/* Minimalist Skip Intro Button */}
       <button
         onClick={handleSkip}
         type="button"
         className="absolute bottom-6 right-6 z-30 px-3.5 py-1.5 rounded-full border border-zinc-800 bg-zinc-950/80 hover:bg-zinc-900 text-[11px] font-mono tracking-wider text-zinc-400 hover:text-white uppercase transition-all duration-200 backdrop-blur-md cursor-pointer flex items-center space-x-1.5 shadow-lg group"
       >
         <span>Skip Intro</span>
-        <span className="text-emerald-400 group-hover:translate-x-0.5 transition-transform duration-150">
+        <span className="text-zinc-400 group-hover:text-white group-hover:translate-x-0.5 transition-transform duration-150">
           →
         </span>
       </button>

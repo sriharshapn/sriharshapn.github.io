@@ -23,7 +23,7 @@ export class GraduationCapScene {
   private animationFrameId: number | null = null;
   private isDisposed = false;
 
-  // Materials for wireframe-to-solid transition
+  // Materials for smooth line-art-to-solid transition
   private wireframeMaterials: THREE.LineBasicMaterial[] = [];
   private solidMaterials: THREE.MeshStandardMaterial[] = [];
 
@@ -35,11 +35,11 @@ export class GraduationCapScene {
     rotX: 0,
     rotY: 0,
     rotZ: 0,
-    capScale: 0.25,
+    capScale: 0.35,
     wireframeToSolid: 0,
-    camZ: 5.5,
+    camZ: 4.5,
     camY: 0,
-    sceneOpacity: 0, // Starts completely invisible for Scene 1!
+    sceneOpacity: 0, // Starts completely cleared for Scene 1
   };
 
   constructor(container: HTMLElement) {
@@ -51,10 +51,10 @@ export class GraduationCapScene {
     // 2. Camera setup
     const width = container.clientWidth || window.innerWidth;
     const height = container.clientHeight || window.innerHeight;
-    this.camera = new THREE.PerspectiveCamera(38, width / height, 0.1, 100);
-    this.camera.position.set(0, 0, 5.5);
+    this.camera = new THREE.PerspectiveCamera(36, width / height, 0.1, 100);
+    this.camera.position.set(0, 0, 4.5);
 
-    // 3. Renderer setup
+    // 3. WebGL Renderer
     this.renderer = new THREE.WebGLRenderer({
       antialias: true,
       alpha: true,
@@ -63,13 +63,13 @@ export class GraduationCapScene {
     this.renderer.setSize(width, height);
     this.renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
     this.renderer.toneMapping = THREE.ACESFilmicToneMapping;
-    this.renderer.toneMappingExposure = 1.2;
+    this.renderer.toneMappingExposure = 1.1;
     this.container.appendChild(this.renderer.domElement);
 
-    // 4. Lights
+    // 4. Setup Lighting
     this.setupLights();
 
-    // 5. Build Graduation Cap Geometry
+    // 5. Build Proportional Realistic Graduation Cap
     this.capGroup = new THREE.Group();
     this.buildGraduationCap();
     this.scene.add(this.capGroup);
@@ -81,56 +81,61 @@ export class GraduationCapScene {
 
   private setupLights() {
     // Soft ambient fill
-    const ambientLight = new THREE.AmbientLight(0x0e131f, 1.5);
+    const ambientLight = new THREE.AmbientLight(0x181a24, 1.4);
     this.scene.add(ambientLight);
 
     // Primary key directional light
-    const keyLight = new THREE.DirectionalLight(0xffffff, 2.6);
-    keyLight.position.set(4, 6, 5);
+    const keyLight = new THREE.DirectionalLight(0xffffff, 2.2);
+    keyLight.position.set(3, 5, 4);
     this.scene.add(keyLight);
 
-    // Emerald rim light (portfolio signature accent)
-    const rimLight = new THREE.DirectionalLight(0x10b981, 2.4);
-    rimLight.position.set(-5, 3, -3);
+    // Subtle cool rim light for elegant edge definition
+    const rimLight = new THREE.DirectionalLight(0xe2e8f0, 1.2);
+    rimLight.position.set(-4, 3, -3);
     this.scene.add(rimLight);
 
-    // Bottom soft cyan fill catching the circular underside rim
-    const bottomFill = new THREE.PointLight(0x38bdf8, 2.0, 14);
-    bottomFill.position.set(0, -2, 4);
+    // Bottom soft fill catching the circular underside aperture
+    const bottomFill = new THREE.PointLight(0xf1f5f9, 1.6, 12);
+    bottomFill.position.set(0, -2, 3.5);
     this.scene.add(bottomFill);
   }
 
   private buildGraduationCap() {
-    // Shared solid materials
+    // ----------------------------------------------------
+    // Authentic Restrained Materials
+    // ----------------------------------------------------
+    // Realistic matte woven black fabric (no shiny plastics or bright outlines)
     const blackFabricMaterial = new THREE.MeshStandardMaterial({
-      color: 0x090b11,
-      roughness: 0.55,
-      metalness: 0.2,
+      color: 0x14161e,
+      roughness: 0.82,
+      metalness: 0.05,
       side: THREE.DoubleSide,
       transparent: true,
       opacity: 0,
     });
     this.solidMaterials.push(blackFabricMaterial);
 
-    const emeraldSatinMaterial = new THREE.MeshStandardMaterial({
-      color: 0x10b981,
-      roughness: 0.35,
-      metalness: 0.45,
+    // Dark charcoal silk for tassel cord and brush
+    const tasselSilkMaterial = new THREE.MeshStandardMaterial({
+      color: 0x181d22,
+      roughness: 0.72,
+      metalness: 0.1,
       transparent: true,
       opacity: 0,
     });
-    this.solidMaterials.push(emeraldSatinMaterial);
+    this.solidMaterials.push(tasselSilkMaterial);
 
-    const goldAccentMaterial = new THREE.MeshStandardMaterial({
-      color: 0x34d399,
-      roughness: 0.25,
-      metalness: 0.8,
+    // Subtle brushed brass/gold accent for center button clasp
+    const brassAccentMaterial = new THREE.MeshStandardMaterial({
+      color: 0xc4a052,
+      roughness: 0.4,
+      metalness: 0.65,
       transparent: true,
       opacity: 0,
     });
-    this.solidMaterials.push(goldAccentMaterial);
+    this.solidMaterials.push(brassAccentMaterial);
 
-    // Shared wireframe line material (for Scene 2/3 wireframe phase)
+    // Clean white line-art wireframe (strictly for Scene 2/3 morphing, no green)
     const lineMat = new THREE.LineBasicMaterial({
       color: 0xffffff,
       transparent: true,
@@ -138,23 +143,22 @@ export class GraduationCapScene {
     });
     this.wireframeMaterials.push(lineMat);
 
-    // Center offset to keep the geometric center of rotation balanced
-    const yCenter = 0.4;
+    // Geometric center of rotation
+    const yCenter = 0.25;
 
     // ----------------------------------------------------
-    // A. Square Mortarboard Top (Plinth)
+    // 1. Square Mortarboard Top (Plinth) - Proportional & Flat
     // ----------------------------------------------------
-    const boardWidth = 3.0;
-    const boardHeight = 0.08;
-    const boardDepth = 3.0;
+    const boardWidth = 2.2;
+    const boardHeight = 0.045;
+    const boardDepth = 2.2;
     const boardGeo = new THREE.BoxGeometry(boardWidth, boardHeight, boardDepth);
     const boardMesh = new THREE.Mesh(boardGeo, blackFabricMaterial);
     boardMesh.position.y = yCenter;
-    // Diamond alignment
-    boardMesh.rotation.y = Math.PI / 4;
+    boardMesh.rotation.y = Math.PI / 4; // Classic diamond alignment
     this.capGroup.add(boardMesh);
 
-    // Board wireframe outline
+    // Board line-art outline
     const boardEdgesGeo = new THREE.EdgesGeometry(boardGeo);
     const boardEdges = new THREE.LineSegments(boardEdgesGeo, lineMat);
     boardEdges.position.y = yCenter;
@@ -162,28 +166,28 @@ export class GraduationCapScene {
     this.capGroup.add(boardEdges);
 
     // ----------------------------------------------------
-    // B. Center Button (on top of mortarboard)
+    // 2. Center Pivot Button (Low profile on top of plinth)
     // ----------------------------------------------------
-    const buttonGeo = new THREE.CylinderGeometry(0.15, 0.15, 0.06, 24);
-    const buttonMesh = new THREE.Mesh(buttonGeo, goldAccentMaterial);
-    buttonMesh.position.y = yCenter + boardHeight / 2 + 0.03;
+    const buttonGeo = new THREE.CylinderGeometry(0.08, 0.08, 0.03, 24);
+    const buttonMesh = new THREE.Mesh(buttonGeo, brassAccentMaterial);
+    buttonMesh.position.y = yCenter + boardHeight / 2 + 0.015;
     this.capGroup.add(buttonMesh);
 
     // ----------------------------------------------------
-    // C. Skull Cap / Head Fitting (Mounted Underneath)
-    // CRITICAL: Circular Underside Opening
+    // 3. Skull Cap / Head Fitting (Mounted Underneath)
+    // Recognisable rounded central headpiece with circular cavity
     // ----------------------------------------------------
-    const skullCapHeight = 0.85;
-    const skullCapTopRadius = 1.0;
-    const skullCapBottomRadius = 1.35;
+    const skullCapHeight = 0.52;
+    const skullCapTopRadius = 0.68;
+    const skullCapBottomRadius = 0.88;
     const skullY = yCenter - skullCapHeight / 2;
 
-    // Outer tapered skull cylinder (open-ended so interior is hollow!)
+    // Outer tapered dome cylinder (openEnded: true for hollow interior)
     const skullOuterGeo = new THREE.CylinderGeometry(
       skullCapTopRadius,
       skullCapBottomRadius,
       skullCapHeight,
-      48,
+      64,
       1,
       true
     );
@@ -191,12 +195,12 @@ export class GraduationCapScene {
     skullOuterMesh.position.y = skullY;
     this.capGroup.add(skullOuterMesh);
 
-    // Inner lining cylinder (creates authentic wall depth)
+    // Inner lining cylinder (creates clean realistic wall depth)
     const skullInnerGeo = new THREE.CylinderGeometry(
-      skullCapTopRadius - 0.04,
-      skullCapBottomRadius - 0.04,
+      skullCapTopRadius - 0.03,
+      skullCapBottomRadius - 0.03,
       skullCapHeight,
-      48,
+      64,
       1,
       true
     );
@@ -204,27 +208,27 @@ export class GraduationCapScene {
     skullInnerMesh.position.y = skullY;
     this.capGroup.add(skullInnerMesh);
 
-    // Circular Underside Rim (Connecting inner and outer edges at bottom opening)
+    // Circular Underside Rim (Authentic circular opening edge)
     const rimGeo = new THREE.RingGeometry(
-      skullCapBottomRadius - 0.04,
+      skullCapBottomRadius - 0.03,
       skullCapBottomRadius,
-      48
+      64
     );
-    const rimMesh = new THREE.Mesh(rimGeo, goldAccentMaterial);
+    const rimMesh = new THREE.Mesh(rimGeo, blackFabricMaterial);
     rimMesh.rotation.x = Math.PI / 2;
     rimMesh.position.y = yCenter - skullCapHeight;
     this.capGroup.add(rimMesh);
 
-    // Skull cap wireframe edges
+    // Skull cap wireframe outlines (only visible during Scene 2/3 morph)
     const skullEdgesGeo = new THREE.EdgesGeometry(skullOuterGeo);
     const skullEdges = new THREE.LineSegments(skullEdgesGeo, lineMat);
     skullEdges.position.y = skullY;
     this.capGroup.add(skullEdges);
 
-    // Circular rim wireframe circle
+    // Circular rim wireframe guide
     const rimCircleGeo = new THREE.BufferGeometry();
     const rimPoints: THREE.Vector3[] = [];
-    const segments = 48;
+    const segments = 64;
     for (let i = 0; i <= segments; i++) {
       const theta = (i / segments) * Math.PI * 2;
       rimPoints.push(
@@ -240,29 +244,29 @@ export class GraduationCapScene {
     this.capGroup.add(rimCircle);
 
     // ----------------------------------------------------
-    // D. Braided Tassel
+    // 4. Natural Proportional Tassel (Reduced length, organic drape)
     // ----------------------------------------------------
     const tasselCurve = new THREE.CatmullRomCurve3([
-      new THREE.Vector3(0, yCenter + boardHeight / 2 + 0.03, 0),
-      new THREE.Vector3(0.65, yCenter + boardHeight / 2 + 0.02, 0.65),
-      new THREE.Vector3(1.35, yCenter + boardHeight / 2 + 0.01, 1.35),
-      new THREE.Vector3(1.65, yCenter - 0.2, 1.65),
-      new THREE.Vector3(1.75, yCenter - 0.8, 1.75),
+      new THREE.Vector3(0, yCenter + boardHeight / 2 + 0.02, 0),
+      new THREE.Vector3(0.45, yCenter + boardHeight / 2 + 0.015, 0.45),
+      new THREE.Vector3(0.92, yCenter + boardHeight / 2 + 0.01, 0.92), // Reaches board edge
+      new THREE.Vector3(1.12, yCenter - 0.08, 1.12),                  // Bends naturally over edge
+      new THREE.Vector3(1.18, yCenter - 0.35, 1.18),                  // Hangs gracefully
     ]);
-    const tasselCordGeo = new THREE.TubeGeometry(tasselCurve, 32, 0.024, 8, false);
-    const tasselCord = new THREE.Mesh(tasselCordGeo, emeraldSatinMaterial);
+    const tasselCordGeo = new THREE.TubeGeometry(tasselCurve, 28, 0.018, 8, false);
+    const tasselCord = new THREE.Mesh(tasselCordGeo, tasselSilkMaterial);
     this.capGroup.add(tasselCord);
 
-    // Tassel ornament clasp
-    const claspGeo = new THREE.CylinderGeometry(0.05, 0.05, 0.07, 16);
-    const claspMesh = new THREE.Mesh(claspGeo, goldAccentMaterial);
-    claspMesh.position.set(1.75, yCenter - 0.82, 1.75);
+    // Small brass clasp
+    const claspGeo = new THREE.CylinderGeometry(0.035, 0.035, 0.05, 16);
+    const claspMesh = new THREE.Mesh(claspGeo, brassAccentMaterial);
+    claspMesh.position.set(1.18, yCenter - 0.37, 1.18);
     this.capGroup.add(claspMesh);
 
-    // Tassel fringe skirt
-    const fringeGeo = new THREE.CylinderGeometry(0.045, 0.13, 0.5, 24);
-    const fringeMesh = new THREE.Mesh(fringeGeo, emeraldSatinMaterial);
-    fringeMesh.position.set(1.75, yCenter - 1.1, 1.75);
+    // Short natural silk fringe skirt
+    const fringeGeo = new THREE.CylinderGeometry(0.03, 0.08, 0.28, 20);
+    const fringeMesh = new THREE.Mesh(fringeGeo, tasselSilkMaterial);
+    fringeMesh.position.set(1.18, yCenter - 0.52, 1.18);
     this.capGroup.add(fringeMesh);
   }
 
@@ -279,18 +283,17 @@ export class GraduationCapScene {
     if (this.isDisposed) return;
 
     if (this.state.sceneOpacity <= 0.001) {
-      // Invisible in Scene 1
       this.renderer.clear();
       this.animationFrameId = requestAnimationFrame(this.animate);
       return;
     }
 
-    // Apply cap transform from state
+    // Apply cap transform from animation state
     this.capGroup.position.set(this.state.capX, this.state.capY, this.state.capZ);
     this.capGroup.rotation.set(this.state.rotX, this.state.rotY, this.state.rotZ);
     this.capGroup.scale.setScalar(this.state.capScale);
 
-    // Apply camera transform from state
+    // Apply camera transform from state (locked directly on cap center)
     this.camera.position.z = this.state.camZ;
     this.camera.position.y = this.state.camY;
     this.camera.lookAt(this.state.capX, this.state.capY, this.state.capZ);
