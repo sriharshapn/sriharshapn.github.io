@@ -134,6 +134,19 @@ export const GlobalDotMatrix: React.FC = () => {
     window.addEventListener('pointerleave', handlePointerLeave, { passive: true });
 
     let lastTime = performance.now();
+    let lastScrollY = window.scrollY;
+    let scrollVelocity = 0;
+
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+      const delta = currentScrollY - lastScrollY;
+      lastScrollY = currentScrollY;
+      // Cap delta to prevent sudden jarring leaps on instant jump
+      const clampedDelta = Math.max(-60, Math.min(60, delta));
+      scrollVelocity += clampedDelta * 0.35;
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
 
     const render = (time: number) => {
       // Calculate delta time
@@ -148,6 +161,9 @@ export const GlobalDotMatrix: React.FC = () => {
         mouseX += (targetMouseX - mouseX) * 0.2;
         mouseY += (targetMouseY - mouseY) * 0.2;
       }
+
+      // Damped decay of scroll inertia
+      scrollVelocity *= 0.91;
 
       ctx.clearRect(0, 0, width, height);
 
@@ -170,8 +186,11 @@ export const GlobalDotMatrix: React.FC = () => {
         const waveX = Math.sin(dot.phase) * (1.8 * dot.depth);
         const waveY = Math.cos(dot.phase * 1.3) * (1.8 * dot.depth);
 
+        // React naturally to vertical scrolling based on particle optical depth
+        const scrollDisplacementY = -scrollVelocity * 0.16 * dot.depth;
+
         let targetX = dot.originX + waveX;
-        let targetY = dot.originY + waveY;
+        let targetY = dot.originY + waveY + scrollDisplacementY;
         let currentAlpha = dot.baseAlpha;
 
         // Cursor Repulsion calculation
@@ -223,6 +242,7 @@ export const GlobalDotMatrix: React.FC = () => {
     return () => {
       cancelAnimationFrame(animationFrameId);
       window.removeEventListener('resize', handleResize);
+      window.removeEventListener('scroll', handleScroll);
       window.removeEventListener('pointermove', handlePointerMove);
       window.removeEventListener('pointerleave', handlePointerLeave);
       clearTimeout(resizeTimer);

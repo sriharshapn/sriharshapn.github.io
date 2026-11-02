@@ -40,28 +40,33 @@ export const Contact: React.FC = () => {
   };
 
   return (
-    <section id="contact" className="py-20 lg:py-28 relative border-t border-slate-900 bg-slate-950/60">
+    <section 
+      id="contact" 
+      className="py-20 lg:py-28 relative border-t border-slate-900 bg-gradient-to-b from-slate-950/60 via-slate-950/90 to-[#06080E] overflow-hidden"
+    >
       {/* Background accents */}
       <div className="absolute top-1/2 left-1/3 w-[500px] h-[500px] bg-emerald-500/5 blur-[160px] pointer-events-none rounded-full" />
       <div className="absolute bottom-10 right-10 w-[400px] h-[400px] bg-violet-600/5 blur-[140px] pointer-events-none rounded-full" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
-        {/* Section Header with Viewport Animation */}
+        {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-60px' }}
-          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
           className="space-y-3 mb-12 lg:mb-16"
         >
           <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-slate-900 border border-slate-800 text-xs font-mono uppercase tracking-[0.12em] text-emerald-400">
             <Mail className="w-3.5 h-3.5" />
             <span>07 // DIRECT COMMUNICATION</span>
           </div>
+
           <h2 className="text-[clamp(2rem,5vw,3.5rem)] font-bold text-white tracking-[-0.03em] leading-tight">
             Contact & Collaboration
           </h2>
+
           <p className="text-slate-400 text-sm sm:text-base max-w-2xl font-sans mt-2">
             Open to engineering internships, AI/ML research collaborations, and hackathon projects.
           </p>
@@ -69,12 +74,12 @@ export const Contact: React.FC = () => {
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
           
-          {/* Left Column: Direct Contact Info & Socials */}
+          {/* Left Column: Direct Contact Info & Socials (Sequential Entrance) */}
           <motion.div
-            initial={{ opacity: 0, y: 24 }}
+            initial={{ opacity: 0, y: 28 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-60px' }}
-            transition={{ duration: 0.6, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
+            transition={{ duration: 0.7, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
             className="lg:col-span-5 space-y-6"
           >
             
@@ -193,10 +198,10 @@ export const Contact: React.FC = () => {
 
           {/* Right Column: Genuine Email Dispatch Composer */}
           <motion.div
-            initial={{ opacity: 0, y: 24 }}
+            initial={{ opacity: 0, y: 28 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-60px' }}
-            transition={{ duration: 0.6, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+            transition={{ duration: 0.7, delay: 0.18, ease: [0.16, 1, 0.3, 1] }}
             className="lg:col-span-7"
           >
             <div className="p-6 sm:p-8 rounded-2xl bg-gradient-to-b from-slate-900/60 to-slate-950 border border-slate-800 space-y-5 shadow-xl">

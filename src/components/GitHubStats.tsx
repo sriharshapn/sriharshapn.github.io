@@ -152,9 +152,19 @@ export const GitHubStats: React.FC = () => {
               <GithubIcon className="w-3.5 h-3.5" />
               <span>06 // OPEN SOURCE TELEMETRY</span>
             </div>
-            <h2 className="text-[clamp(2rem,5vw,3.5rem)] font-bold text-white tracking-[-0.03em] leading-tight">
-              GitHub Profile & Repositories
-            </h2>
+
+            <div className="overflow-hidden pb-1">
+              <motion.h2 
+                initial={{ y: '110%', opacity: 0 }}
+                whileInView={{ y: '0%', opacity: 1 }}
+                viewport={{ once: true, margin: '-40px' }}
+                transition={{ duration: 0.75, ease: [0.16, 1, 0.3, 1] }}
+                className="text-[clamp(2rem,5vw,3.5rem)] font-bold text-white tracking-[-0.03em] leading-tight"
+              >
+                GitHub Profile & Repositories
+              </motion.h2>
+            </div>
+
             <p className="text-slate-400 text-sm sm:text-base max-w-2xl font-sans mt-2">
               Direct links to open-source contributions, hackathon sprints, and engineering codebases.
             </p>

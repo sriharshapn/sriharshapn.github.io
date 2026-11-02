@@ -1,5 +1,5 @@
-import React from 'react';
-import { motion } from 'framer-motion';
+import React, { useRef } from 'react';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import { 
   Terminal, 
   MapPin, 
@@ -19,15 +19,25 @@ import { TiltCard } from './TiltCard';
 import { GithubIcon, LinkedinIcon } from './SocialIcons';
 
 export const About: React.FC = () => {
+  const sectionRef = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ['start end', 'end start'],
+  });
+
+  // Subtle differential parallax for editorial depth
+  const leftColumnParallax = useTransform(scrollYProgress, [0, 1], [-20, 25]);
+  const rightColumnParallax = useTransform(scrollYProgress, [0, 1], [15, -20]);
+
   return (
     <section 
+      ref={sectionRef}
       id="about" 
       className="py-24 lg:py-32 relative border-t border-zinc-900 bg-[#080B11] text-zinc-100 overflow-hidden"
     >
       {/* Background ambient lighting */}
       <div className="absolute top-1/4 left-1/12 w-96 h-96 bg-emerald-500/5 blur-[140px] pointer-events-none rounded-full" />
       <div className="absolute bottom-1/4 right-1/12 w-96 h-96 bg-violet-600/5 blur-[140px] pointer-events-none rounded-full" />
-      
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
@@ -35,8 +45,8 @@ export const About: React.FC = () => {
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-60px' }}
-          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
           className="space-y-3 mb-12 lg:mb-16"
         >
           <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-zinc-900/90 border border-zinc-800 text-xs font-mono uppercase tracking-[0.12em] text-lime-400">
@@ -46,6 +56,7 @@ export const About: React.FC = () => {
 
           <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-4">
             <div>
+              {/* Upward Heading Reveal */}
               <h2 className="text-[clamp(2rem,5vw,3.5rem)] font-bold text-white tracking-[-0.03em] leading-tight">
                 About Me
               </h2>
@@ -75,10 +86,11 @@ export const About: React.FC = () => {
               LEFT COLUMN: Editorial Portrait & Personal Identity
              ======================================================== */}
           <motion.div
+            style={{ y: leftColumnParallax }}
             initial={{ opacity: 0, x: -24 }}
             whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, margin: '-60px' }}
-            transition={{ duration: 0.6, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
+            viewport={{ once: true, amount: 0.15 }}
+            transition={{ duration: 0.7, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
             className="lg:col-span-5 space-y-6"
           >
             {/* Portrait Card with 3D Tilt */}
@@ -91,8 +103,14 @@ export const About: React.FC = () => {
                 <div className="absolute bottom-2 left-2 text-[10px] font-mono text-zinc-600 select-none">+</div>
                 <div className="absolute bottom-2 right-2 text-[10px] font-mono text-zinc-600 select-none">+</div>
 
-                {/* Portrait Image Frame */}
-                <div className="relative aspect-[4/5] rounded-xl overflow-hidden border border-zinc-800 bg-zinc-900">
+                {/* Portrait Image Frame with Masked Clip-Path Entrance */}
+                <motion.div 
+                  initial={{ clipPath: 'inset(8% 0% 8% 0%)', opacity: 0, scale: 1.04 }}
+                  whileInView={{ clipPath: 'inset(0% 0% 0% 0%)', opacity: 1, scale: 1 }}
+                  viewport={{ once: true, amount: 0.15 }}
+                  transition={{ duration: 0.95, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
+                  className="relative aspect-[4/5] rounded-xl overflow-hidden border border-zinc-800 bg-zinc-900"
+                >
                   <img
                     src="./profile.jpg"
                     alt={personalInfo.name}
@@ -130,7 +148,7 @@ export const About: React.FC = () => {
                       </span>
                     </div>
                   </div>
-                </div>
+                </motion.div>
 
                 {/* Identity Quick Highlights */}
                 <div className="mt-4 pt-4 border-t border-zinc-800/80 space-y-2.5">
@@ -209,16 +227,24 @@ export const About: React.FC = () => {
               RIGHT COLUMN: Interactive Terminal & Editorial Narrative
              ======================================================== */}
           <motion.div
+            style={{ y: rightColumnParallax }}
             initial={{ opacity: 0, x: 24 }}
             whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, margin: '-60px' }}
-            transition={{ duration: 0.6, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+            viewport={{ once: true, amount: 0.15 }}
+            transition={{ duration: 0.7, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
             className="lg:col-span-7 space-y-8"
           >
-            {/* The Interactive Terminal Component */}
-            <InteractiveTerminal />
+            {/* The Interactive Terminal Component with Workspace Elevation Entrance */}
+            <motion.div
+              initial={{ opacity: 0, y: 35, scale: 0.97 }}
+              whileInView={{ opacity: 1, y: 0, scale: 1 }}
+              viewport={{ once: true, amount: 0.15 }}
+              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+            >
+              <InteractiveTerminal />
+            </motion.div>
 
-            {/* Editorial Narrative Biography */}
+            {/* Editorial Narrative Biography with Staggered Paragraph Reveals */}
             <div className="p-6 sm:p-8 rounded-2xl bg-zinc-950/60 border border-zinc-800/80 space-y-5 backdrop-blur-md">
               <div className="flex items-center space-x-2 text-xs font-mono text-lime-400">
                 <Code2 className="w-4 h-4" />
@@ -227,9 +253,16 @@ export const About: React.FC = () => {
 
               <div className="space-y-4 text-zinc-200 text-sm sm:text-base leading-relaxed font-normal">
                 {personalInfo.aboutParagraphs.map((paragraph, idx) => (
-                  <p key={idx} className="text-zinc-300">
+                  <motion.p
+                    key={idx}
+                    initial={{ opacity: 0, y: 16 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, amount: 'some' }}
+                    transition={{ duration: 0.65, delay: idx * 0.12, ease: [0.16, 1, 0.3, 1] }}
+                    className="text-zinc-300"
+                  >
                     {paragraph}
-                  </p>
+                  </motion.p>
                 ))}
               </div>
 

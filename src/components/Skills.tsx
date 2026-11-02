@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { 
   Code, 
   Brain, 
@@ -8,11 +8,23 @@ import {
   Sparkles,
   Terminal
 } from 'lucide-react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, useScroll, useSpring } from 'framer-motion';
 import { skillCategories } from '../data/portfolioData';
 
 export const Skills: React.FC = () => {
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
+  const sectionRef = useRef<HTMLElement>(null);
+
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ['start 80%', 'end 30%'],
+  });
+
+  const smoothProgress = useSpring(scrollYProgress, {
+    stiffness: 90,
+    damping: 24,
+    restDelta: 0.001,
+  });
 
   const getCategoryIcon = (iconName: string) => {
     switch (iconName) {
@@ -36,10 +48,43 @@ export const Skills: React.FC = () => {
     : skillCategories.filter((c) => c.title === selectedCategory);
 
   return (
-    <section id="skills" className="py-20 lg:py-28 relative border-t border-slate-900 bg-[#080B11]">
+    <section 
+      ref={sectionRef}
+      id="skills" 
+      className="py-20 lg:py-28 relative border-t border-slate-900 bg-[#080B11] overflow-hidden"
+    >
       {/* Background accents */}
       <div className="absolute top-1/3 right-10 w-96 h-96 bg-emerald-500/5 blur-[120px] pointer-events-none rounded-full" />
       <div className="absolute bottom-10 left-10 w-80 h-80 bg-violet-600/5 blur-[120px] pointer-events-none rounded-full" />
+
+      {/* Decorative Animated Circuit Line between skill nodes */}
+      <div className="absolute inset-0 pointer-events-none z-0 hidden lg:block opacity-25">
+        <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
+          <motion.path
+            d="M 120,180 L 450,180 L 520,260 L 980,260 L 1040,340 L 1320,340"
+            fill="none"
+            stroke="url(#skillGradient)"
+            strokeWidth="1.5"
+            strokeDasharray="6 6"
+            style={{ pathLength: smoothProgress }}
+          />
+          <motion.path
+            d="M 180,480 L 500,480 L 580,560 L 920,560 L 1000,480 L 1300,480"
+            fill="none"
+            stroke="url(#skillGradient)"
+            strokeWidth="1.5"
+            strokeDasharray="4 8"
+            style={{ pathLength: smoothProgress }}
+          />
+          <defs>
+            <linearGradient id="skillGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stopColor="#10B981" />
+              <stop offset="50%" stopColor="#2DD4BF" />
+              <stop offset="100%" stopColor="#8B5CF6" />
+            </linearGradient>
+          </defs>
+        </svg>
+      </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
@@ -47,18 +92,20 @@ export const Skills: React.FC = () => {
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-60px' }}
-          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
           className="flex flex-col md:flex-row md:items-end justify-between mb-12 lg:mb-16 gap-6"
         >
-          <div className="space-y-2">
+          <div className="space-y-3">
             <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-slate-900 border border-slate-800 text-xs font-mono uppercase tracking-[0.12em] text-emerald-400">
               <Sparkles className="w-3.5 h-3.5" />
               <span>02 // TECHNICAL REPERTOIRE</span>
             </div>
+
             <h2 className="text-[clamp(2rem,5vw,3.5rem)] font-bold text-white tracking-[-0.03em] leading-tight">
               Skills & Technologies
             </h2>
+
             <p className="text-slate-400 text-sm sm:text-base max-w-2xl font-mono">
               Technologies, frameworks, and libraries utilized and explored across projects, simulations, and hackathons.
             </p>
@@ -94,7 +141,7 @@ export const Skills: React.FC = () => {
           </div>
         </motion.div>
 
-        {/* Categories Grid with Staggered Viewport Entrance */}
+        {/* Categories Grid with Sequential Viewport Entrance */}
         <motion.div
           layout
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
@@ -104,10 +151,11 @@ export const Skills: React.FC = () => {
               <motion.div
                 key={category.title}
                 layout
-                initial={{ opacity: 0, scale: 0.95, y: 20 }}
-                animate={{ opacity: 1, scale: 1, y: 0 }}
-                exit={{ opacity: 0, scale: 0.95, y: 20 }}
-                transition={{ duration: 0.4, delay: idx * 0.05 }}
+                initial={{ opacity: 0, y: 30, scale: 0.98 }}
+                whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                viewport={{ once: true, margin: '-50px' }}
+                exit={{ opacity: 0, scale: 0.95, y: 15 }}
+                transition={{ duration: 0.55, delay: idx * 0.08, ease: [0.16, 1, 0.3, 1] }}
                 className="p-6 rounded-2xl bg-slate-900/40 hover:bg-slate-900/70 border border-slate-800/90 hover:border-slate-700/80 transition-all duration-300 group flex flex-col justify-between shadow-lg hover:shadow-xl hover:shadow-black/40"
               >
                 <div>
@@ -130,13 +178,16 @@ export const Skills: React.FC = () => {
                   </p>
                 </div>
 
-                {/* Skills Tags with Micro-Interactions */}
+                {/* Skills Tags with Staggered Upward Movement & Micro-Hover */}
                 <div className="flex flex-wrap gap-2 pt-3 border-t border-slate-800/60">
-                  {category.skills.map((skill) => (
+                  {category.skills.map((skill, skillIdx) => (
                     <motion.span
                       key={skill}
+                      initial={{ opacity: 0, y: 8 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.35, delay: 0.15 + skillIdx * 0.025, ease: 'easeOut' }}
                       whileHover={{ scale: 1.05, y: -2 }}
-                      transition={{ type: 'spring', stiffness: 350, damping: 20 }}
                       className="inline-flex items-center space-x-1.5 px-3 py-1.5 rounded-lg bg-slate-950/80 hover:bg-slate-800 border border-slate-800/80 hover:border-emerald-500/40 text-xs font-mono text-slate-300 hover:text-emerald-300 transition-colors shadow-2xs cursor-default"
                     >
                       <span className="w-1.5 h-1.5 rounded-full bg-emerald-400/70" />
@@ -151,10 +202,10 @@ export const Skills: React.FC = () => {
 
         {/* Explanatory Note regarding authentic representation */}
         <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
+          initial={{ opacity: 0, y: 15 }}
+          whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.3 }}
+          transition={{ duration: 0.6, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
           className="mt-10 p-4 rounded-xl bg-slate-900/20 border border-slate-800/60 flex items-center justify-between text-xs font-mono text-slate-400"
         >
           <div className="flex items-center gap-2">
