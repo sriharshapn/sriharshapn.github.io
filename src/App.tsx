@@ -9,12 +9,27 @@ import { Events } from './components/Events';
 import { GitHubStats } from './components/GitHubStats';
 import { Contact } from './components/Contact';
 import { Footer } from './components/Footer';
+import { ScrollProgress } from './components/ScrollProgress';
+import { CustomCursor } from './components/CustomCursor';
+import { BackgroundAmbient } from './components/BackgroundAmbient';
 
 export const App: React.FC = () => {
   return (
-    <div className="min-h-screen bg-[#080B11] text-slate-100 selection:bg-emerald-500/30 selection:text-emerald-200">
+    <div className="relative min-h-screen bg-[#080B11] text-slate-100 selection:bg-emerald-500/30 selection:text-emerald-200 overflow-x-hidden">
+      {/* Top scroll progress indicator */}
+      <ScrollProgress />
+
+      {/* Desktop custom cursor & mouse follower spotlight */}
+      <CustomCursor />
+
+      {/* Background ambient lighting and subtle tech grid */}
+      <BackgroundAmbient />
+
+      {/* Navigation */}
       <Navbar />
-      <main>
+
+      {/* Main Content Sections */}
+      <main className="relative z-10">
         <Hero />
         <About />
         <Skills />
@@ -24,6 +39,8 @@ export const App: React.FC = () => {
         <GitHubStats />
         <Contact />
       </main>
+
+      {/* Footer */}
       <Footer />
     </div>
   );

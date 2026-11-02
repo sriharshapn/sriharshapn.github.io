@@ -1,8 +1,10 @@
 import React from 'react';
 import { ArrowDown, MapPin, GraduationCap, ArrowRight } from 'lucide-react';
+import { motion } from 'framer-motion';
 import { personalInfo } from '../data/portfolioData';
 import { HeroVisual } from './HeroVisual';
 import { GithubIcon } from './SocialIcons';
+import { MagneticButton } from './MagneticButton';
 
 export const Hero: React.FC = () => {
   return (
@@ -15,11 +17,16 @@ export const Hero: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-8 items-center">
           
-          {/* Left Column: Hero Content */}
+          {/* Left Column: Hero Content with Staggered Motion Entrance */}
           <div className="lg:col-span-7 space-y-6 text-left">
             
             {/* Status Pills */}
-            <div className="inline-flex flex-wrap items-center gap-2">
+            <motion.div
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+              className="inline-flex flex-wrap items-center gap-2"
+            >
               <div className="inline-flex items-center space-x-2 px-3 py-1.5 rounded-full bg-slate-900/90 border border-slate-800 text-xs text-slate-300 font-mono backdrop-blur-md shadow-xs">
                 <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
                 <span className="text-emerald-300 font-semibold">{personalInfo.title}</span>
@@ -34,10 +41,15 @@ export const Hero: React.FC = () => {
                 <MapPin className="w-3.5 h-3.5 text-slate-500" />
                 <span>Bengaluru</span>
               </div>
-            </div>
+            </motion.div>
 
             {/* Name & Headline */}
-            <div className="space-y-3">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
+              className="space-y-3"
+            >
               <h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-white leading-tight">
                 <span className="block text-slate-100">Sri Harsha</span>
                 <span className="block text-slate-100">Penugondla Nagaraja</span>
@@ -45,46 +57,67 @@ export const Hero: React.FC = () => {
               <p className="text-lg sm:text-xl lg:text-2xl font-semibold bg-gradient-to-r from-emerald-400 via-teal-300 to-violet-400 bg-clip-text text-transparent">
                 "{personalInfo.heroSubtitle}"
               </p>
-            </div>
+            </motion.div>
 
             {/* Narrative summary */}
-            <p className="text-slate-300 text-sm sm:text-base lg:text-lg leading-relaxed max-w-2xl font-normal">
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+              className="text-slate-300 text-sm sm:text-base lg:text-lg leading-relaxed max-w-2xl font-normal"
+            >
               Artificial Intelligence and Machine Learning engineering student at <span className="text-slate-100 font-medium">BMSCE Bengaluru</span>.
               Passionate about bridging AI models with production-grade engineering—spanning computer vision, OCR, scalable backend architectures, and physics simulations.
-            </p>
+            </motion.p>
 
-            {/* CTAs and Links */}
-            <div className="pt-2 flex flex-wrap items-center gap-3 sm:gap-4">
-              <a
-                href="#projects"
-                className="w-full sm:w-auto text-center px-6 py-3.5 rounded-xl bg-gradient-to-r from-emerald-500 to-emerald-400 hover:from-emerald-400 hover:to-teal-300 text-slate-950 font-bold text-sm tracking-wide transition-all shadow-lg shadow-emerald-950/40 hover:shadow-emerald-500/25 active:scale-95 flex items-center justify-center gap-2 group"
-              >
-                <span>View Projects</span>
-                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-              </a>
+            {/* CTAs and Links with Magnetic Attraction */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
+              className="pt-2 flex flex-wrap items-center gap-3 sm:gap-4"
+            >
+              <MagneticButton pullFactor={0.22} className="w-full sm:w-auto">
+                <a
+                  href="#projects"
+                  className="w-full sm:w-auto text-center px-6 py-3.5 rounded-xl bg-gradient-to-r from-emerald-500 to-emerald-400 hover:from-emerald-400 hover:to-teal-300 text-slate-950 font-bold text-sm tracking-wide transition-all shadow-lg shadow-emerald-950/40 hover:shadow-emerald-500/30 active:scale-95 flex items-center justify-center gap-2 group"
+                >
+                  <span>View Projects</span>
+                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1.5 transition-transform duration-200" />
+                </a>
+              </MagneticButton>
 
-              <a
-                href="#contact"
-                className="w-full sm:w-auto text-center px-6 py-3.5 rounded-xl bg-slate-900/90 hover:bg-slate-800/90 border border-slate-800 hover:border-slate-700 text-slate-200 font-semibold text-sm tracking-wide transition-all active:scale-95 shadow-sm"
-              >
-                Contact Me
-              </a>
+              <MagneticButton pullFactor={0.22} className="w-full sm:w-auto">
+                <a
+                  href="#contact"
+                  className="w-full sm:w-auto text-center px-6 py-3.5 rounded-xl bg-slate-900/90 hover:bg-slate-800/90 border border-slate-800 hover:border-slate-700 text-slate-200 font-semibold text-sm tracking-wide transition-all active:scale-95 shadow-sm inline-block"
+                >
+                  Contact Me
+                </a>
+              </MagneticButton>
 
-              <a
-                href={personalInfo.github}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="GitHub Profile"
-                className="w-full sm:w-auto px-5 py-3.5 rounded-xl bg-slate-950/80 hover:bg-slate-900 border border-slate-800 hover:border-slate-700 text-slate-300 hover:text-white font-mono text-sm tracking-tight transition-all flex items-center justify-center gap-2.5 group"
-              >
-                <GithubIcon className="w-4 h-4 text-emerald-400 group-hover:scale-110 transition-transform" />
-                <span>github.com/sriharshapn</span>
-              </a>
-            </div>
+              <MagneticButton pullFactor={0.2} className="w-full sm:w-auto">
+                <a
+                  href={personalInfo.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="GitHub Profile"
+                  className="w-full sm:w-auto px-5 py-3.5 rounded-xl bg-slate-950/80 hover:bg-slate-900 border border-slate-800 hover:border-slate-700 text-slate-300 hover:text-white font-mono text-sm tracking-tight transition-all flex items-center justify-center gap-2.5 group"
+                >
+                  <GithubIcon className="w-4 h-4 text-emerald-400 group-hover:scale-110 transition-transform" />
+                  <span>github.com/sriharshapn</span>
+                </a>
+              </MagneticButton>
+            </motion.div>
 
             {/* Engineering Highlights Quick Bar */}
-            <div className="pt-6 border-t border-slate-800/70 grid grid-cols-3 gap-4 max-w-xl">
-              <div>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
+              className="pt-6 border-t border-slate-800/70 grid grid-cols-3 gap-4 max-w-xl"
+            >
+              <div className="p-3 rounded-xl bg-slate-900/20 hover:bg-slate-900/40 border border-transparent hover:border-slate-800 transition-colors">
                 <div className="text-xl sm:text-2xl font-mono font-bold text-white flex items-center gap-1">
                   <span>6</span>
                   <span className="text-emerald-400 text-lg">+</span>
@@ -94,7 +127,7 @@ export const Hero: React.FC = () => {
                 </div>
               </div>
 
-              <div>
+              <div className="p-3 rounded-xl bg-slate-900/20 hover:bg-slate-900/40 border border-transparent hover:border-slate-800 transition-colors">
                 <div className="text-xl sm:text-2xl font-mono font-bold text-white flex items-center gap-1">
                   <span>3</span>
                   <span className="text-violet-400 text-lg">+</span>
@@ -104,7 +137,7 @@ export const Hero: React.FC = () => {
                 </div>
               </div>
 
-              <div>
+              <div className="p-3 rounded-xl bg-slate-900/20 hover:bg-slate-900/40 border border-transparent hover:border-slate-800 transition-colors">
                 <div className="text-xl sm:text-2xl font-mono font-bold text-white flex items-center gap-1">
                   <span>BMSCE</span>
                 </div>
@@ -112,14 +145,19 @@ export const Hero: React.FC = () => {
                   AI & ML Dept
                 </div>
               </div>
-            </div>
+            </motion.div>
 
           </div>
 
           {/* Right Column: Subtle Animated Visual Element */}
-          <div className="lg:col-span-5 w-full">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.96 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.8, delay: 0.25, ease: [0.22, 1, 0.36, 1] }}
+            className="lg:col-span-5 w-full"
+          >
             <HeroVisual />
-          </div>
+          </motion.div>
 
         </div>
 
@@ -127,11 +165,11 @@ export const Hero: React.FC = () => {
         <div className="mt-10 lg:mt-14 flex justify-center">
           <a
             href="#about"
-            className="inline-flex items-center gap-2 text-xs font-mono text-slate-500 hover:text-emerald-400 transition-colors p-2 rounded-full focus:outline-none focus:ring-1 focus:ring-emerald-500"
+            className="inline-flex items-center gap-2 text-xs font-mono text-slate-500 hover:text-emerald-400 transition-colors p-2 rounded-full focus:outline-none focus:ring-1 focus:ring-emerald-500 group"
             aria-label="Scroll to About section"
           >
-            <span>DISCOVER MORE</span>
-            <ArrowDown className="w-3.5 h-3.5 animate-bounce" />
+            <span className="group-hover:tracking-wider transition-all">DISCOVER MORE</span>
+            <ArrowDown className="w-3.5 h-3.5 animate-bounce text-emerald-400/80" />
           </a>
         </div>
       </div>

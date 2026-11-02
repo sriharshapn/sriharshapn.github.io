@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { Star, BookOpen, ExternalLink } from 'lucide-react';
+import { Star, BookOpen, ExternalLink, Activity } from 'lucide-react';
+import { motion } from 'framer-motion';
 import { personalInfo } from '../data/portfolioData';
 import { GithubIcon } from './SocialIcons';
+import { MagneticButton } from './MagneticButton';
 
 interface GitHubProfile {
   login: string;
@@ -137,8 +139,14 @@ export const GitHubStats: React.FC = () => {
     <section className="py-20 lg:py-24 relative border-t border-slate-900 bg-[#080B11]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
-        {/* Section Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
+        {/* Section Header with Viewport Animation */}
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-60px' }}
+          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+          className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6"
+        >
           <div className="space-y-2">
             <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-slate-900 border border-slate-800 text-xs font-mono text-emerald-400">
               <GithubIcon className="w-3.5 h-3.5" />
@@ -152,35 +160,50 @@ export const GitHubStats: React.FC = () => {
             </p>
           </div>
 
-          <a
-            href={personalInfo.github}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-slate-700 text-xs font-mono text-slate-200 hover:text-white transition-all shadow-sm"
-          >
-            <GithubIcon className="w-4 h-4 text-emerald-400" />
-            <span>github.com/{profile.login}</span>
-            <ExternalLink className="w-3.5 h-3.5 text-slate-500" />
-          </a>
-        </div>
+          <MagneticButton pullFactor={0.2}>
+            <a
+              href={personalInfo.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-slate-700 text-xs font-mono text-slate-200 hover:text-white transition-all shadow-sm group"
+            >
+              <GithubIcon className="w-4 h-4 text-emerald-400 group-hover:scale-110 transition-transform" />
+              <span>github.com/{profile.login}</span>
+              <ExternalLink className="w-3.5 h-3.5 text-slate-500 group-hover:text-emerald-400 transition-colors" />
+            </a>
+          </MagneticButton>
+        </motion.div>
 
-        {/* GitHub Overview Card */}
-        <div className="p-6 sm:p-8 rounded-2xl bg-gradient-to-r from-slate-900/60 via-slate-900/40 to-slate-950/80 border border-slate-800 mb-8 flex flex-col md:flex-row items-center justify-between gap-6 shadow-xl">
+        {/* GitHub Overview Card with Subtle Glow */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-60px' }}
+          transition={{ duration: 0.6, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
+          className="p-6 sm:p-8 rounded-2xl bg-gradient-to-r from-slate-900/60 via-slate-900/40 to-slate-950/80 border border-slate-800 hover:border-slate-700/80 mb-8 flex flex-col md:flex-row items-center justify-between gap-6 shadow-xl transition-all duration-300"
+        >
           <div className="flex items-center space-x-4">
-            <img
-              src={profile.avatar_url}
-              alt={profile.name}
-              className="w-16 h-16 rounded-2xl border-2 border-slate-800 shadow-md bg-slate-800"
-              loading="lazy"
-            />
+            <div className="relative group">
+              <img
+                src={profile.avatar_url}
+                alt={profile.name}
+                className="w-16 h-16 rounded-2xl border-2 border-slate-800 shadow-md bg-slate-800 group-hover:border-emerald-500/40 transition-colors"
+                loading="lazy"
+              />
+              <span className="absolute -bottom-1 -right-1 w-4 h-4 rounded-full bg-slate-950 flex items-center justify-center">
+                <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse" />
+              </span>
+            </div>
+
             <div>
               <div className="flex items-center gap-2">
                 <h3 className="text-lg font-bold text-white tracking-tight">
                   {profile.name}
                 </h3>
                 {isLive && (
-                  <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-emerald-950/60 text-emerald-400 border border-emerald-800/60">
-                    Live Synced
+                  <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-emerald-950/60 text-emerald-400 border border-emerald-800/60 flex items-center gap-1">
+                    <Activity className="w-3 h-3 text-emerald-400" />
+                    <span>Live Synced</span>
                   </span>
                 )}
               </div>
@@ -191,7 +214,7 @@ export const GitHubStats: React.FC = () => {
           </div>
 
           <div className="flex items-center space-x-6 sm:space-x-8 text-center border-t md:border-t-0 md:border-l border-slate-800 pt-4 md:pt-0 md:pl-8 w-full md:w-auto justify-around md:justify-start">
-            <div>
+            <div className="p-2 rounded-lg hover:bg-slate-900/40 transition-colors">
               <div className="text-xl sm:text-2xl font-bold font-mono text-white">
                 {profile.public_repos}
               </div>
@@ -200,7 +223,7 @@ export const GitHubStats: React.FC = () => {
               </div>
             </div>
 
-            <div>
+            <div className="p-2 rounded-lg hover:bg-slate-900/40 transition-colors">
               <div className="text-xl sm:text-2xl font-bold font-mono text-emerald-400">
                 {profile.followers}
               </div>
@@ -209,7 +232,7 @@ export const GitHubStats: React.FC = () => {
               </div>
             </div>
 
-            <div>
+            <div className="p-2 rounded-lg hover:bg-slate-900/40 transition-colors">
               <div className="text-xl sm:text-2xl font-bold font-mono text-violet-400">
                 {profile.following}
               </div>
@@ -218,17 +241,22 @@ export const GitHubStats: React.FC = () => {
               </div>
             </div>
           </div>
-        </div>
+        </motion.div>
 
-        {/* Repositories Grid */}
+        {/* Repositories Grid with Staggered Entrance and Micro-Hover */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-          {showcaseRepos.map((repo) => (
-            <a
+          {showcaseRepos.map((repo, idx) => (
+            <motion.a
               key={repo.name}
               href={repo.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="p-5 rounded-xl bg-slate-900/30 hover:bg-slate-900/70 border border-slate-800/80 hover:border-slate-700/80 transition-all duration-200 flex flex-col justify-between group shadow-sm hover:shadow-md"
+              initial={{ opacity: 0, y: 15 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-40px' }}
+              transition={{ duration: 0.4, delay: idx * 0.04 }}
+              whileHover={{ y: -3, transition: { duration: 0.2 } }}
+              className="p-5 rounded-xl bg-slate-900/30 hover:bg-slate-900/70 border border-slate-800/80 hover:border-slate-700/80 transition-all duration-200 flex flex-col justify-between group shadow-sm hover:shadow-lg hover:shadow-black/30"
             >
               <div className="space-y-2.5">
                 <div className="flex items-center justify-between">
@@ -236,7 +264,7 @@ export const GitHubStats: React.FC = () => {
                     <BookOpen className="w-3.5 h-3.5 text-emerald-400" />
                     <span className="truncate">{repo.displayName || repo.name}</span>
                   </div>
-                  <ExternalLink className="w-3.5 h-3.5 text-slate-600 group-hover:text-slate-300 transition-colors shrink-0" />
+                  <ExternalLink className="w-3.5 h-3.5 text-slate-600 group-hover:text-slate-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform shrink-0" />
                 </div>
 
                 <p className="text-xs text-slate-400 leading-relaxed line-clamp-3 font-normal">
@@ -262,7 +290,7 @@ export const GitHubStats: React.FC = () => {
                   </span>
                 )}
               </div>
-            </a>
+            </motion.a>
           ))}
         </div>
 
