@@ -240,10 +240,10 @@ export const FrontierLanding: React.FC<FrontierLandingProps> = ({
                 transition={{ duration: 1.1, delay: 0.25, ease: [0.16, 1, 0.3, 1] }}
                 className="space-y-2 mb-2"
               >
-                <h1 className="font-['Rye'] text-4xl sm:text-6xl md:text-7xl lg:text-8xl tracking-wider text-[#FFF5EA] drop-shadow-[0_4px_35px_rgba(0,0,0,0.98)] uppercase">
+                <h1 className="font-['ChineseRocks','Rye'] text-4xl sm:text-6xl md:text-7xl lg:text-8xl tracking-wider text-[#FFF5EA] drop-shadow-[0_4px_35px_rgba(0,0,0,0.98)] uppercase">
                   Sri Harsha
                 </h1>
-                <p className="font-['Cinzel'] text-xs sm:text-sm md:text-base tracking-[0.35em] uppercase text-[#D4AF7A] font-semibold drop-shadow-md">
+                <p className="font-['ChineseRocks','Cinzel'] text-xs sm:text-sm md:text-base tracking-[0.35em] uppercase text-[#D4AF7A] font-semibold drop-shadow-md">
                   Developer · Builder · Explorer
                 </p>
               </motion.div>

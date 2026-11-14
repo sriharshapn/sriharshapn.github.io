@@ -73,7 +73,7 @@ export const FrontierMissionBoard: React.FC<FrontierMissionBoardProps> = ({ onBa
                 Blackwater Sheriff Office & Bounty Archive · 1899
               </span>
             </div>
-            <h2 className="font-['Cinzel'] text-2xl sm:text-4xl font-black text-[#FFF5EA] tracking-wide uppercase">
+            <h2 className="font-['ChineseRocks','Cinzel'] text-2xl sm:text-4xl font-black text-[#FFF5EA] tracking-wide uppercase">
               The Mission Board
             </h2>
           </div>
@@ -253,7 +253,7 @@ export const FrontierMissionBoard: React.FC<FrontierMissionBoardProps> = ({ onBa
                 <span className="font-mono text-[10px] uppercase tracking-widest text-[#783D32] font-bold block mb-1">
                   Classified Mission Dossier · {selectedProject.category}
                 </span>
-                <h3 className="font-['Cinzel'] text-2xl sm:text-3xl font-black text-[#251D17] uppercase tracking-wide">
+                <h3 className="font-['ChineseRocks','Cinzel'] text-2xl sm:text-3xl font-black text-[#251D17] uppercase tracking-wide">
                   {selectedProject.name}
                 </h3>
                 {'eventBadge' in selectedProject && selectedProject.eventBadge && (

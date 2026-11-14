@@ -1,11 +1,20 @@
 @import "tailwindcss";
 
+@font-face {
+  font-family: "ChineseRocks";
+  src: url("/fonts/chinese rocks rg.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
 @theme {
   --font-sans: "Inter", system-ui, -apple-system, sans-serif;
   --font-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-  --font-western: "Rye", Georgia, serif;
+  --font-western: "ChineseRocks", "Rye", Georgia, serif;
   --font-cinzel: "Cinzel", "Times New Roman", serif;
   --font-journal: "Playfair Display", Georgia, serif;
+  --font-rdr: "ChineseRocks", "Rye", Georgia, serif;
 
   --color-frontier-bg: #171512;
   --color-frontier-dark: #251D17;

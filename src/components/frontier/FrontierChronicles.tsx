@@ -52,7 +52,7 @@ export const FrontierChronicles: React.FC<FrontierChroniclesProps> = ({ onBackTo
             <span>Price: Five Cents</span>
           </div>
 
-          <h2 className="font-['Rye'] text-3xl sm:text-5xl md:text-6xl text-[#251D17] uppercase tracking-wider">
+          <h2 className="font-['ChineseRocks','Rye'] text-3xl sm:text-5xl md:text-6xl text-[#251D17] uppercase tracking-wider">
             The Strawberry Gazette
           </h2>
 
