@@ -143,7 +143,7 @@ export const FrontierLanding: React.FC<FrontierLandingProps> = ({
       <header className="relative z-20 w-full max-w-7xl mx-auto px-6 pt-8 flex items-center justify-between">
         <div className="flex items-center space-x-2.5">
           <span className="h-2 w-2 rounded-full bg-[#B18A57] animate-pulse" />
-          <span className="font-mono text-xs uppercase tracking-[0.25em] text-[#B18A57]">
+          <span className="font-['ChineseRocks'] text-xs uppercase tracking-[0.25em] text-[#B18A57]">
             The American Frontier · 1899
           </span>
         </div>
@@ -227,7 +227,7 @@ export const FrontierLanding: React.FC<FrontierLandingProps> = ({
                 className="inline-flex items-center space-x-3 mb-2 px-4 py-1.5 rounded-full border border-[#B18A57]/40 bg-[#251D17]/80 backdrop-blur-md shadow-lg"
               >
                 <span className="text-[#B18A57] text-xs">✦</span>
-                <span className="font-['Cinzel'] text-[11px] sm:text-xs tracking-[0.3em] uppercase text-[#D7C19C]">
+                <span className="font-['ChineseRocks'] text-[12px] sm:text-xs tracking-[0.3em] uppercase text-[#D7C19C]">
                   Portfolio of an Engineer & Builder
                 </span>
                 <span className="text-[#B18A57] text-xs">✦</span>
@@ -279,7 +279,7 @@ export const FrontierLanding: React.FC<FrontierLandingProps> = ({
                   <span className="absolute -bottom-1.5 -right-1.5 w-3 h-3 border-b-2 border-r-2 border-[#D4AF7A] pointer-events-none" />
 
                   <Compass className="w-5 h-5 text-[#B18A57] group-hover:text-[#D4AF7A] group-hover:rotate-90 transition-all duration-500" />
-                  <span className="font-['Cinzel'] text-sm sm:text-base font-bold tracking-[0.25em] uppercase text-[#FFF5EA] group-hover:text-[#FFF]">
+                  <span className="font-['ChineseRocks'] text-base sm:text-lg font-bold tracking-[0.25em] uppercase text-[#FFF5EA] group-hover:text-[#FFF]">
                     Enter The Frontier
                   </span>
                   <span className="text-[#B18A57] group-hover:translate-x-1 transition-transform">
@@ -303,7 +303,7 @@ export const FrontierLanding: React.FC<FrontierLandingProps> = ({
             type="button"
             className="flex flex-col items-center space-y-1.5 text-center text-[#A58252] hover:text-[#D4AF7A] transition-colors cursor-pointer group"
           >
-            <span className="font-mono text-[9px] uppercase tracking-[0.25em]">
+            <span className="font-['ChineseRocks'] text-xs uppercase tracking-[0.25em]">
               Click to Open World Map
             </span>
             <ChevronDown className="w-4 h-4 text-[#B18A57] group-hover:translate-y-1 transition-transform animate-bounce" />

@@ -18,7 +18,7 @@ export const FrontierJournal: React.FC<FrontierJournalProps> = ({ onBackToMap })
           className="group inline-flex items-center space-x-2 px-4 py-2 rounded-xl border border-[#B18A57]/60 bg-[#251D17]/90 text-[#D7C19C] hover:text-[#FFF5EA] hover:border-[#D4AF7A] transition-all shadow-md cursor-pointer"
         >
           <ArrowLeft className="w-4 h-4 text-[#B18A57] group-hover:-translate-x-1 transition-transform" />
-          <span className="font-['Cinzel'] text-xs font-bold uppercase tracking-wider">
+          <span className="font-['ChineseRocks'] text-xs font-bold uppercase tracking-wider">
             Return to World Map
           </span>
         </button>
@@ -64,7 +64,7 @@ export const FrontierJournal: React.FC<FrontierJournalProps> = ({ onBackToMap })
                   <span className="font-mono text-[9px] uppercase tracking-widest text-[#78593A] block">
                     Vol. 1 · Frontier Entries
                   </span>
-                  <h3 className="font-['Cinzel'] text-xl sm:text-2xl font-black tracking-wide text-[#251D17] uppercase">
+                  <h3 className="font-['ChineseRocks'] text-xl sm:text-2xl font-black tracking-wide text-[#251D17] uppercase">
                     Notes From The Trail
                   </h3>
                 </div>
@@ -94,7 +94,7 @@ export const FrontierJournal: React.FC<FrontierJournalProps> = ({ onBackToMap })
                   <span className="inline-block px-2 py-0.5 rounded bg-[#783D32] text-white text-[9.5px] font-mono uppercase tracking-wider font-semibold">
                     Engineer & Builder
                   </span>
-                  <h4 className="font-['Cinzel'] text-base font-bold text-[#251D17]">
+                  <h4 className="font-['ChineseRocks'] text-base font-bold text-[#251D17]">
                     {personalInfo.name}
                   </h4>
                   <p className="font-mono text-[10px] text-[#543E30]">
@@ -135,7 +135,7 @@ export const FrontierJournal: React.FC<FrontierJournalProps> = ({ onBackToMap })
                     <span className="font-mono text-[9px] uppercase tracking-widest text-[#78593A] block">
                       Chapter II · Disciplines
                     </span>
-                    <h3 className="font-['Cinzel'] text-xl sm:text-2xl font-black tracking-wide text-[#251D17] uppercase">
+                    <h3 className="font-['ChineseRocks'] text-xl sm:text-2xl font-black tracking-wide text-[#251D17] uppercase">
                       Education & Craft
                     </h3>
                   </div>
@@ -146,11 +146,11 @@ export const FrontierJournal: React.FC<FrontierJournalProps> = ({ onBackToMap })
                 <div className="p-4 rounded-xl border border-[#A88B67] bg-[#E2D2B8]/60 space-y-2 shadow-sm">
                   <div className="flex items-center space-x-2 text-[#783D32]">
                     <GraduationCap className="w-4 h-4" />
-                    <span className="font-['Cinzel'] text-xs font-bold tracking-wider uppercase">
+                    <span className="font-['ChineseRocks'] text-xs font-bold tracking-wider uppercase">
                       Academic Degree
                     </span>
                   </div>
-                  <h4 className="font-['Cinzel'] text-base font-extrabold text-[#251D17]">
+                  <h4 className="font-['ChineseRocks'] text-base font-extrabold text-[#251D17]">
                     {personalInfo.degree}
                   </h4>
                   <p className="font-mono text-xs font-semibold text-[#543E30]">
@@ -165,7 +165,7 @@ export const FrontierJournal: React.FC<FrontierJournalProps> = ({ onBackToMap })
                 <div className="space-y-2.5">
                   <div className="flex items-center space-x-2 text-[#783D32]">
                     <Sparkles className="w-4 h-4" />
-                    <h4 className="font-['Cinzel'] text-xs font-bold tracking-wider uppercase">
+                    <h4 className="font-['ChineseRocks'] text-xs font-bold tracking-wider uppercase">
                       Engineering Approach
                     </h4>
                   </div>
@@ -214,7 +214,7 @@ export const FrontierJournal: React.FC<FrontierJournalProps> = ({ onBackToMap })
                 <button
                   onClick={onBackToMap}
                   type="button"
-                  className="inline-flex items-center space-x-1 px-3 py-1.5 rounded-lg bg-[#251D17] text-[#D7C19C] hover:text-white font-['Cinzel'] text-xs font-bold uppercase transition-all shadow cursor-pointer"
+                  className="inline-flex items-center space-x-1 px-3 py-1.5 rounded-lg bg-[#251D17] text-[#D7C19C] hover:text-white font-['ChineseRocks'] text-xs font-bold uppercase transition-all shadow cursor-pointer"
                 >
                   <Compass className="w-3.5 h-3.5 text-[#B18A57]" />
                   <span>Resume Trail</span>

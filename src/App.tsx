@@ -15,15 +15,38 @@ import { FrontierSaloon } from './components/frontier/FrontierSaloon';
 import { FrontierCustomCursor } from './components/frontier/FrontierCustomCursor';
 
 export const App: React.FC = () => {
-  const [currentView, setCurrentView] = useState<'landing' | FrontierSectionId>('landing');
+  const getInitialView = (): 'landing' | FrontierSectionId => {
+    if (typeof window === 'undefined') return 'landing';
+    const hash = window.location.hash.replace('#', '') as FrontierSectionId;
+    const validViews: FrontierSectionId[] = ['map', 'journal', 'arsenal', 'mission-board', 'chronicles', 'journey', 'saloon'];
+    return validViews.includes(hash) ? hash : 'landing';
+  };
+
+  const [currentView, setCurrentView] = useState<'landing' | FrontierSectionId>(getInitialView);
   const { isPlaying, toggleSound } = useFrontierAudio();
+
+  React.useEffect(() => {
+    const handleHashChange = () => {
+      const hash = window.location.hash.replace('#', '') as FrontierSectionId;
+      const validViews: FrontierSectionId[] = ['map', 'journal', 'arsenal', 'mission-board', 'chronicles', 'journey', 'saloon'];
+      if (validViews.includes(hash)) {
+        setCurrentView(hash);
+      } else if (!hash) {
+        setCurrentView('landing');
+      }
+    };
+    window.addEventListener('hashchange', handleHashChange);
+    return () => window.removeEventListener('hashchange', handleHashChange);
+  }, []);
 
   const handleEnterFrontier = () => {
     setCurrentView('map');
+    window.location.hash = 'map';
   };
 
   const handleNavigate = (section: FrontierSectionId) => {
     setCurrentView(section);
+    window.location.hash = section;
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 

@@ -20,7 +20,7 @@ export const FrontierChronicles: React.FC<FrontierChroniclesProps> = ({ onBackTo
           className="group inline-flex items-center space-x-2 px-4 py-2 rounded-xl border border-[#B18A57]/60 bg-[#251D17]/90 text-[#D7C19C] hover:text-[#FFF5EA] hover:border-[#D4AF7A] transition-all shadow-md cursor-pointer self-start"
         >
           <ArrowLeft className="w-4 h-4 text-[#B18A57] group-hover:-translate-x-1 transition-transform" />
-          <span className="font-['Cinzel'] text-xs font-bold uppercase tracking-wider">
+          <span className="font-['ChineseRocks'] text-xs font-bold uppercase tracking-wider">
             Return to World Map
           </span>
         </button>
@@ -85,7 +85,7 @@ export const FrontierChronicles: React.FC<FrontierChroniclesProps> = ({ onBackTo
                   </div>
 
                   {/* Headline */}
-                  <h3 className="font-['Cinzel'] text-lg sm:text-xl font-black text-[#251D17] leading-tight uppercase">
+                  <h3 className="font-['ChineseRocks'] text-lg sm:text-xl font-black text-[#251D17] leading-tight uppercase">
                     {event.title}
                   </h3>
 
@@ -169,7 +169,7 @@ export const FrontierChronicles: React.FC<FrontierChroniclesProps> = ({ onBackTo
                   <span className="font-mono text-[10px] uppercase tracking-widest text-[#B18A57]">
                     Official Verified Credential
                   </span>
-                  <h3 className="font-['Cinzel'] text-xl font-bold text-white uppercase">
+                  <h3 className="font-['ChineseRocks'] text-xl font-bold text-white uppercase">
                     {selectedCert.title}
                   </h3>
                 </div>

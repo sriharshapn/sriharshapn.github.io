@@ -47,7 +47,7 @@ export const FrontierSaloon: React.FC<FrontierSaloonProps> = ({ onBackToMap }) =
           className="group inline-flex items-center space-x-2 px-4 py-2 rounded-xl border border-[#B18A57]/60 bg-[#251D17]/90 text-[#D7C19C] hover:text-[#FFF5EA] hover:border-[#D4AF7A] transition-all shadow-md cursor-pointer self-start"
         >
           <ArrowLeft className="w-4 h-4 text-[#B18A57] group-hover:-translate-x-1 transition-transform" />
-          <span className="font-['Cinzel'] text-xs font-bold uppercase tracking-wider">
+          <span className="font-['ChineseRocks'] text-xs font-bold uppercase tracking-wider">
             Return to World Map
           </span>
         </button>
@@ -77,7 +77,7 @@ export const FrontierSaloon: React.FC<FrontierSaloonProps> = ({ onBackToMap }) =
             </span>
           </div>
 
-          <h2 className="font-['Cinzel'] text-2xl sm:text-4xl lg:text-5xl font-black text-[#FFF5EA] tracking-wide uppercase">
+          <h2 className="font-['ChineseRocks'] text-2xl sm:text-4xl lg:text-5xl font-black text-[#FFF5EA] tracking-wide uppercase">
             THE TRAIL DOESN&apos;T END HERE.
           </h2>
 
@@ -142,7 +142,7 @@ export const FrontierSaloon: React.FC<FrontierSaloonProps> = ({ onBackToMap }) =
                     <GithubIcon className="w-4 h-4" />
                   </div>
                   <div className="text-left">
-                    <span className="font-['Cinzel'] text-xs font-bold block uppercase tracking-wider">
+                    <span className="font-['ChineseRocks'] text-xs font-bold block uppercase tracking-wider">
                       GitHub Repositories
                     </span>
                     <span className="font-mono text-[10px] text-[#A58252]">
@@ -164,7 +164,7 @@ export const FrontierSaloon: React.FC<FrontierSaloonProps> = ({ onBackToMap }) =
                     <LinkedinIcon className="w-4 h-4" />
                   </div>
                   <div className="text-left">
-                    <span className="font-['Cinzel'] text-xs font-bold block uppercase tracking-wider">
+                    <span className="font-['ChineseRocks'] text-xs font-bold block uppercase tracking-wider">
                       LinkedIn Network
                     </span>
                     <span className="font-mono text-[10px] text-[#A58252]">
@@ -196,7 +196,7 @@ export const FrontierSaloon: React.FC<FrontierSaloonProps> = ({ onBackToMap }) =
 
             <form onSubmit={handleSendTelegraph} className="space-y-4">
               <div>
-                <label className="block font-['Cinzel'] text-xs font-bold text-[#251D17] uppercase tracking-wider mb-1">
+                <label className="block font-['ChineseRocks'] text-xs font-bold text-[#251D17] uppercase tracking-wider mb-1">
                   Your Name / Identity:
                 </label>
                 <input
@@ -210,7 +210,7 @@ export const FrontierSaloon: React.FC<FrontierSaloonProps> = ({ onBackToMap }) =
               </div>
 
               <div>
-                <label className="block font-['Cinzel'] text-xs font-bold text-[#251D17] uppercase tracking-wider mb-1">
+                <label className="block font-['ChineseRocks'] text-xs font-bold text-[#251D17] uppercase tracking-wider mb-1">
                   Dispatch Subject:
                 </label>
                 <input
@@ -224,7 +224,7 @@ export const FrontierSaloon: React.FC<FrontierSaloonProps> = ({ onBackToMap }) =
               </div>
 
               <div>
-                <label className="block font-['Cinzel'] text-xs font-bold text-[#251D17] uppercase tracking-wider mb-1">
+                <label className="block font-['ChineseRocks'] text-xs font-bold text-[#251D17] uppercase tracking-wider mb-1">
                   Message / Inquiry:
                 </label>
                 <textarea

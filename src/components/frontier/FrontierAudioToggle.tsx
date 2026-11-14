@@ -27,7 +27,7 @@ export const FrontierAudioToggle: React.FC<FrontierAudioToggleProps> = ({ isPlay
       </div>
 
       <div className="flex flex-col text-left">
-        <span className="font-mono text-[9.5px] uppercase tracking-[0.16em] text-[#B18A57]">
+        <span className="font-['ChineseRocks'] text-[11px] uppercase tracking-[0.16em] text-[#B18A57]">
           {isPlaying ? 'Ambiance Active' : 'Sound Off'}
         </span>
         <span className="hidden font-serif text-[10px] italic text-[#D7C19C]/70 sm:inline">

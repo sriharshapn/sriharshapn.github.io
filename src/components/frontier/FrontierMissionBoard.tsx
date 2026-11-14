@@ -49,7 +49,7 @@ export const FrontierMissionBoard: React.FC<FrontierMissionBoardProps> = ({ onBa
           className="group inline-flex items-center space-x-2 px-4 py-2 rounded-xl border border-[#B18A57]/60 bg-[#251D17]/90 text-[#D7C19C] hover:text-[#FFF5EA] hover:border-[#D4AF7A] transition-all shadow-md cursor-pointer self-start"
         >
           <ArrowLeft className="w-4 h-4 text-[#B18A57] group-hover:-translate-x-1 transition-transform" />
-          <span className="font-['Cinzel'] text-xs font-bold uppercase tracking-wider">
+          <span className="font-['ChineseRocks'] text-xs font-bold uppercase tracking-wider">
             Return to World Map
           </span>
         </button>
@@ -83,7 +83,7 @@ export const FrontierMissionBoard: React.FC<FrontierMissionBoardProps> = ({ onBa
             <button
               onClick={() => setFilterMode('all')}
               type="button"
-              className={`px-3 py-1.5 rounded-lg text-xs font-serif transition-colors cursor-pointer ${
+              className={`px-3 py-1.5 rounded-lg text-xs font-['ChineseRocks'] uppercase tracking-wider transition-colors cursor-pointer ${
                 filterMode === 'all'
                   ? 'bg-[#B18A57] text-[#171512] font-bold shadow'
                   : 'text-[#D7C19C] hover:text-white'
@@ -94,7 +94,7 @@ export const FrontierMissionBoard: React.FC<FrontierMissionBoardProps> = ({ onBa
             <button
               onClick={() => setFilterMode('featured')}
               type="button"
-              className={`px-3 py-1.5 rounded-lg text-xs font-serif transition-colors cursor-pointer ${
+              className={`px-3 py-1.5 rounded-lg text-xs font-['ChineseRocks'] uppercase tracking-wider transition-colors cursor-pointer ${
                 filterMode === 'featured'
                   ? 'bg-[#B18A57] text-[#171512] font-bold shadow'
                   : 'text-[#D7C19C] hover:text-white'
@@ -105,7 +105,7 @@ export const FrontierMissionBoard: React.FC<FrontierMissionBoardProps> = ({ onBa
             <button
               onClick={() => setFilterMode('academic')}
               type="button"
-              className={`px-3 py-1.5 rounded-lg text-xs font-serif transition-colors cursor-pointer ${
+              className={`px-3 py-1.5 rounded-lg text-xs font-['ChineseRocks'] uppercase tracking-wider transition-colors cursor-pointer ${
                 filterMode === 'academic'
                   ? 'bg-[#B18A57] text-[#171512] font-bold shadow'
                   : 'text-[#D7C19C] hover:text-white'
@@ -149,7 +149,7 @@ export const FrontierMissionBoard: React.FC<FrontierMissionBoardProps> = ({ onBa
                 <div className="space-y-3 pt-2">
                   {/* Top Notice Header */}
                   <div className="flex items-center justify-between border-b-2 border-[#543E30]/40 pb-2">
-                    <span className="font-['Cinzel'] font-black text-[11px] uppercase tracking-widest text-[#783D32]">
+                    <span className="font-['ChineseRocks'] font-black text-[11px] uppercase tracking-widest text-[#783D32]">
                       {isLeadBounty ? '★ PRIME BOUNTY ★' : `CONTRACT № 0${idx + 1}`}
                     </span>
                     <span className="font-mono text-[9px] uppercase px-2 py-0.5 rounded bg-[#251D17] text-[#D7C19C]">
@@ -159,7 +159,7 @@ export const FrontierMissionBoard: React.FC<FrontierMissionBoardProps> = ({ onBa
 
                   {/* Poster Title */}
                   <div>
-                    <h3 className="font-['Cinzel'] text-xl sm:text-2xl font-black text-[#251D17] uppercase tracking-wide leading-tight">
+                    <h3 className="font-['ChineseRocks'] text-xl sm:text-2xl font-black text-[#251D17] uppercase tracking-wide leading-tight">
                       {project.name}
                     </h3>
                     {'eventBadge' in project && project.eventBadge && (
@@ -207,7 +207,7 @@ export const FrontierMissionBoard: React.FC<FrontierMissionBoardProps> = ({ onBa
                   <span className="font-mono text-[10px] text-[#78593A] uppercase tracking-wider">
                     Click to Open Dossier
                   </span>
-                  <span className="font-['Cinzel'] text-xs font-bold text-[#783D32] group-hover:underline flex items-center space-x-1">
+                  <span className="font-['ChineseRocks'] text-xs font-bold text-[#783D32] group-hover:underline flex items-center space-x-1">
                     <span>View Brief</span>
                     <span>→</span>
                   </span>
@@ -266,7 +266,7 @@ export const FrontierMissionBoard: React.FC<FrontierMissionBoardProps> = ({ onBa
 
               {/* Narrative Mission Briefing */}
               <div className="space-y-1.5">
-                <h4 className="font-['Cinzel'] text-xs font-bold text-[#783D32] uppercase tracking-widest">
+                <h4 className="font-['ChineseRocks'] text-xs font-bold text-[#783D32] uppercase tracking-widest">
                   Mission Briefing & Problem Solved
                 </h4>
                 <p className="font-['Playfair_Display'] text-sm sm:text-base leading-relaxed text-[#3B2C21] indent-3">
@@ -279,7 +279,7 @@ export const FrontierMissionBoard: React.FC<FrontierMissionBoardProps> = ({ onBa
                 <div className="p-4 rounded-xl bg-[#C8B08B]/60 border border-[#A88B67] space-y-1.5">
                   <div className="flex items-center space-x-2 text-[#783D32]">
                     <Cpu className="w-4 h-4" />
-                    <h4 className="font-['Cinzel'] text-xs font-bold uppercase tracking-wider">
+                    <h4 className="font-['ChineseRocks'] text-xs font-bold uppercase tracking-wider">
                       My Role & Contribution:
                     </h4>
                   </div>
@@ -306,7 +306,7 @@ export const FrontierMissionBoard: React.FC<FrontierMissionBoardProps> = ({ onBa
 
               {/* Key Technical Highlights */}
               <div className="space-y-2">
-                <h4 className="font-['Cinzel'] text-xs font-bold text-[#783D32] uppercase tracking-widest">
+                <h4 className="font-['ChineseRocks'] text-xs font-bold text-[#783D32] uppercase tracking-widest">
                   Key Technical Capabilities
                 </h4>
                 <ul className="space-y-1.5 text-xs font-mono text-[#3B2C21]">
@@ -327,7 +327,7 @@ export const FrontierMissionBoard: React.FC<FrontierMissionBoardProps> = ({ onBa
 
               {/* Technologies Applied */}
               <div className="space-y-2 pt-1 border-t border-[#A88B67]/50">
-                <h4 className="font-['Cinzel'] text-[11px] font-bold text-[#78593A] uppercase tracking-wider">
+                <h4 className="font-['ChineseRocks'] text-[11px] font-bold text-[#78593A] uppercase tracking-wider">
                   Technology Stack:
                 </h4>
                 <div className="flex flex-wrap gap-1.5">

@@ -8,11 +8,27 @@
   font-display: swap;
 }
 
+@font-face {
+  font-family: "Cinzel";
+  src: url("/fonts/chinese rocks rg.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Rye";
+  src: url("/fonts/chinese rocks rg.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
 @theme {
-  --font-sans: "Inter", system-ui, -apple-system, sans-serif;
+  --font-sans: "ChineseRocks", "Inter", system-ui, -apple-system, sans-serif;
   --font-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
   --font-western: "ChineseRocks", "Rye", Georgia, serif;
-  --font-cinzel: "Cinzel", "Times New Roman", serif;
+  --font-cinzel: "ChineseRocks", "Cinzel", "Times New Roman", serif;
   --font-journal: "Playfair Display", Georgia, serif;
   --font-rdr: "ChineseRocks", "Rye", Georgia, serif;
 
@@ -43,6 +59,17 @@ body {
   background-color: #171512;
   font-family: var(--font-sans);
   overflow-x: hidden;
+}
+
+/* Red Dead Redemption Global Typography */
+h1, h2, h3, h4, h5, h6,
+button,
+label,
+.font-western,
+.font-cinzel,
+.font-rdr {
+  font-family: "ChineseRocks", "Cinzel", "Rye", serif !important;
+  letter-spacing: 0.04em;
 }
 
 ::selection {

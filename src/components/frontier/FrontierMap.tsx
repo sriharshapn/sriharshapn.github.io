@@ -52,7 +52,7 @@ export const FrontierMap: React.FC<FrontierMapProps> = ({
             <span className="text-[#B18A57]">•</span>
             <span className="font-mono text-[10px] text-[#A58252]">1899 Survey</span>
           </div>
-          <h2 className="font-['Cinzel'] text-xl sm:text-3xl font-extrabold text-[#FFF5EA] tracking-wider uppercase">
+          <h2 className="font-['ChineseRocks'] text-xl sm:text-3xl font-extrabold text-[#FFF5EA] tracking-wider uppercase">
             World Map & Waypoints
           </h2>
         </div>
@@ -283,7 +283,7 @@ export const FrontierMap: React.FC<FrontierMapProps> = ({
 
                   {/* Town Nameplate Underneath */}
                   <div className="mt-1.5 px-2.5 py-0.5 rounded-md bg-[#251D17]/90 border border-[#B18A57]/60 shadow-lg text-center backdrop-blur-sm transition-transform group-hover:scale-105">
-                    <span className="block font-['Cinzel'] text-[11px] sm:text-xs font-bold text-[#FFF5EA] uppercase tracking-wider whitespace-nowrap">
+                    <span className="block font-['ChineseRocks'] text-[11px] sm:text-xs font-bold text-[#FFF5EA] uppercase tracking-wider whitespace-nowrap">
                       {loc.name}
                     </span>
                     <span className="block font-mono text-[8.5px] uppercase tracking-widest text-[#D4AF7A]">
@@ -309,7 +309,7 @@ export const FrontierMap: React.FC<FrontierMapProps> = ({
                   <div className="flex items-center justify-between border-b border-[#B18A57]/30 pb-2">
                     <div className="flex items-center space-x-2">
                       <span className="text-[#D4AF7A] text-xs font-serif">✦</span>
-                      <span className="font-['Cinzel'] text-sm font-bold text-[#FFF5EA] uppercase tracking-wider">
+                      <span className="font-['ChineseRocks'] text-sm font-bold text-[#FFF5EA] uppercase tracking-wider">
                         {hoveredLoc.name} · {hoveredLoc.region}
                       </span>
                     </div>
@@ -329,7 +329,7 @@ export const FrontierMap: React.FC<FrontierMapProps> = ({
                     <button
                       onClick={() => onSelectLocation(hoveredLoc.id)}
                       type="button"
-                      className="inline-flex items-center space-x-1 font-['Cinzel'] text-[11px] font-bold text-[#D4AF7A] hover:text-white uppercase tracking-wider cursor-pointer"
+                      className="inline-flex items-center space-x-1 font-['ChineseRocks'] text-[11px] font-bold text-[#D4AF7A] hover:text-white uppercase tracking-wider cursor-pointer"
                     >
                       <span>Explore</span>
                       <ChevronRight className="w-3.5 h-3.5" />
@@ -342,7 +342,7 @@ export const FrontierMap: React.FC<FrontierMapProps> = ({
 
           {/* 5. Map Legend & Quick Guide (Top Left of Map) */}
           <div className="absolute top-4 left-4 z-20 hidden md:block max-w-[210px] p-3 rounded-xl bg-[#251D17]/85 border border-[#543E30] text-[#D7C19C] text-[10px] backdrop-blur-sm pointer-events-none shadow-md">
-            <div className="flex items-center space-x-1.5 font-['Cinzel'] font-bold text-[#FFF5EA] uppercase tracking-wider border-b border-[#543E30] pb-1 mb-1.5">
+            <div className="flex items-center space-x-1.5 font-['ChineseRocks'] font-bold text-[#FFF5EA] uppercase tracking-wider border-b border-[#543E30] pb-1 mb-1.5">
               <Sparkles className="w-3 h-3 text-[#B18A57]" />
               <span>Map Legend</span>
             </div>
@@ -370,7 +370,7 @@ export const FrontierMap: React.FC<FrontierMapProps> = ({
                     {LOCATION_ICONS[loc.id]}
                   </div>
                   <div>
-                    <h3 className="font-['Cinzel'] text-base font-bold text-[#FFF5EA] uppercase tracking-wider group-hover:text-[#D4AF7A]">
+                    <h3 className="font-['ChineseRocks'] text-base font-bold text-[#FFF5EA] uppercase tracking-wider group-hover:text-[#D4AF7A]">
                       {loc.name}
                     </h3>
                     <p className="font-mono text-[10px] uppercase text-[#B18A57] tracking-widest">
@@ -391,7 +391,7 @@ export const FrontierMap: React.FC<FrontierMapProps> = ({
                 <span className="font-mono text-[10px] text-[#A58252]">
                   Click to travel to waypoint
                 </span>
-                <span className="font-['Cinzel'] text-xs font-bold text-[#B18A57] group-hover:text-[#D4AF7A] flex items-center space-x-1">
+                <span className="font-['ChineseRocks'] text-xs font-bold text-[#B18A57] group-hover:text-[#D4AF7A] flex items-center space-x-1">
                   <span>Enter {loc.tagline}</span>
                   <span>→</span>
                 </span>

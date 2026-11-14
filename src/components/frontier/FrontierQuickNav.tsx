@@ -59,10 +59,10 @@ export const FrontierQuickNav: React.FC<FrontierQuickNavProps> = ({
               <Compass className="w-4 h-4 text-[#B18A57] group-hover:rotate-45 transition-transform duration-500" />
             </div>
             <div>
-              <span className="block font-['Cinzel'] text-xs sm:text-sm font-bold tracking-widest text-[#E8DCC5] group-hover:text-[#D4AF7A] transition-colors uppercase">
+              <span className="block font-['ChineseRocks'] text-xs sm:text-sm font-bold tracking-widest text-[#E8DCC5] group-hover:text-[#D4AF7A] transition-colors uppercase">
                 Sri Harsha
               </span>
-              <span className="block font-mono text-[9px] uppercase tracking-[0.2em] text-[#B18A57]">
+              <span className="block font-['ChineseRocks'] text-[10px] uppercase tracking-[0.2em] text-[#B18A57]">
                 The Frontier · 1899
               </span>
             </div>
@@ -74,7 +74,7 @@ export const FrontierQuickNav: React.FC<FrontierQuickNavProps> = ({
           <button
             onClick={() => handleSelect('map')}
             type="button"
-            className={`flex items-center space-x-1.5 px-3 py-1.5 rounded-lg text-xs font-serif tracking-wide transition-all cursor-pointer ${
+            className={`flex items-center space-x-1.5 px-3 py-1.5 rounded-lg text-xs font-['ChineseRocks'] uppercase tracking-wider transition-all cursor-pointer ${
               currentSection === 'map'
                 ? 'bg-[#B18A57]/20 text-[#D4AF7A] border border-[#B18A57]/60 shadow-[0_0_12px_rgba(177,138,87,0.25)]'
                 : 'text-[#D7C19C]/70 hover:text-[#E8DCC5] hover:bg-[#251D17]'
@@ -91,7 +91,7 @@ export const FrontierQuickNav: React.FC<FrontierQuickNavProps> = ({
                 key={loc.id}
                 onClick={() => handleSelect(loc.id)}
                 type="button"
-                className={`flex items-center space-x-1.5 px-3 py-1.5 rounded-lg text-xs font-serif tracking-wide transition-all cursor-pointer ${
+                className={`flex items-center space-x-1.5 px-3 py-1.5 rounded-lg text-xs font-['ChineseRocks'] uppercase tracking-wider transition-all cursor-pointer ${
                   isActive
                     ? 'bg-[#B18A57]/20 text-[#D4AF7A] border border-[#B18A57]/60 shadow-[0_0_12px_rgba(177,138,87,0.25)]'
                     : 'text-[#D7C19C]/70 hover:text-[#E8DCC5] hover:bg-[#251D17]'

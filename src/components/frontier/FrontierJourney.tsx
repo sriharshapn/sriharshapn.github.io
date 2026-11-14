@@ -18,7 +18,7 @@ export const FrontierJourney: React.FC<FrontierJourneyProps> = ({ onBackToMap })
           className="group inline-flex items-center space-x-2 px-4 py-2 rounded-xl border border-[#B18A57]/60 bg-[#251D17]/90 text-[#D7C19C] hover:text-[#FFF5EA] hover:border-[#D4AF7A] transition-all shadow-md cursor-pointer self-start"
         >
           <ArrowLeft className="w-4 h-4 text-[#B18A57] group-hover:-translate-x-1 transition-transform" />
-          <span className="font-['Cinzel'] text-xs font-bold uppercase tracking-wider">
+          <span className="font-['ChineseRocks'] text-xs font-bold uppercase tracking-wider">
             Return to World Map
           </span>
         </button>
@@ -42,7 +42,7 @@ export const FrontierJourney: React.FC<FrontierJourneyProps> = ({ onBackToMap })
                 Horseshoe Overlook Ridge · The Expedition Ledger
               </span>
             </div>
-            <h2 className="font-['Cinzel'] text-2xl sm:text-4xl font-black text-[#FFF5EA] tracking-wide uppercase">
+            <h2 className="font-['ChineseRocks'] text-2xl sm:text-4xl font-black text-[#FFF5EA] tracking-wide uppercase">
               The Frontier Trail
             </h2>
           </div>
@@ -67,7 +67,7 @@ export const FrontierJourney: React.FC<FrontierJourneyProps> = ({ onBackToMap })
             >
               {/* Trail Marker Knot Icon */}
               <div className="absolute -left-[30px] sm:-left-[42px] top-6 w-8 h-8 rounded-full bg-[#171512] border-2 border-[#B18A57] flex items-center justify-center shadow-md">
-                <span className="font-['Cinzel'] text-xs font-bold text-[#D4AF7A]">
+                <span className="font-['ChineseRocks'] text-xs font-bold text-[#D4AF7A]">
                   0{idx + 1}
                 </span>
               </div>
@@ -78,7 +78,7 @@ export const FrontierJourney: React.FC<FrontierJourneyProps> = ({ onBackToMap })
                   <span className="font-mono text-xs font-bold text-[#D4AF7A] uppercase tracking-wider block">
                     {milestone.period}
                   </span>
-                  <h3 className="font-['Cinzel'] text-lg sm:text-xl font-bold text-[#FFF5EA] uppercase tracking-wide">
+                  <h3 className="font-['ChineseRocks'] text-lg sm:text-xl font-bold text-[#FFF5EA] uppercase tracking-wide">
                     {milestone.title}
                   </h3>
                 </div>

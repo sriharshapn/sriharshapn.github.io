@@ -71,7 +71,7 @@ export const FrontierArsenal: React.FC<FrontierArsenalProps> = ({ onBackToMap })
           className="group inline-flex items-center space-x-2 px-4 py-2 rounded-xl border border-[#B18A57]/60 bg-[#251D17]/90 text-[#D7C19C] hover:text-[#FFF5EA] hover:border-[#D4AF7A] transition-all shadow-md cursor-pointer self-start"
         >
           <ArrowLeft className="w-4 h-4 text-[#B18A57] group-hover:-translate-x-1 transition-transform" />
-          <span className="font-['Cinzel'] text-xs font-bold uppercase tracking-wider">
+          <span className="font-['ChineseRocks'] text-xs font-bold uppercase tracking-wider">
             Return to World Map
           </span>
         </button>
@@ -94,7 +94,7 @@ export const FrontierArsenal: React.FC<FrontierArsenalProps> = ({ onBackToMap })
                 Saint Denis Munitions & Instruments · 1899
               </span>
             </div>
-            <h2 className="font-['Cinzel'] text-2xl sm:text-3xl font-black text-[#FFF5EA] tracking-wide uppercase">
+            <h2 className="font-['ChineseRocks'] text-2xl sm:text-3xl font-black text-[#FFF5EA] tracking-wide uppercase">
               The Technical Arsenal
             </h2>
           </div>
@@ -122,7 +122,7 @@ export const FrontierArsenal: React.FC<FrontierArsenalProps> = ({ onBackToMap })
                 }`}
               >
                 {CATEGORY_ICONS[idx]}
-                <span className="font-['Cinzel'] uppercase tracking-wider">{cat.title}</span>
+                <span className="font-['ChineseRocks'] uppercase tracking-wider">{cat.title}</span>
               </button>
             );
           })}
@@ -165,7 +165,7 @@ export const FrontierArsenal: React.FC<FrontierArsenalProps> = ({ onBackToMap })
                   </div>
 
                   <div>
-                    <h4 className="font-['Cinzel'] text-sm sm:text-base font-bold tracking-wide uppercase">
+                    <h4 className="font-['ChineseRocks'] text-sm sm:text-base font-bold tracking-wide uppercase">
                       {skill}
                     </h4>
                   </div>
@@ -192,7 +192,7 @@ export const FrontierArsenal: React.FC<FrontierArsenalProps> = ({ onBackToMap })
               </div>
 
               <div>
-                <h3 className="font-['Cinzel'] text-2xl font-black text-[#251D17] uppercase tracking-wide">
+                <h3 className="font-['ChineseRocks'] text-2xl font-black text-[#251D17] uppercase tracking-wide">
                   {selectedSkill}
                 </h3>
                 <p className="font-mono text-[10px] text-[#78593A] uppercase tracking-wider">
